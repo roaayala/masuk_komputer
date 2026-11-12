@@ -3,7 +3,7 @@
     @apply inline-flex items-center justify-center gap-2
     px-4 py-2
     h-9
-    rounded-md
+    rounded-lg
     border border-transparent
     cursor-pointer;
 
@@ -12,51 +12,59 @@
     }
 
     > .icon {
-      @apply h-4 w-4 leading-none stroke-2;
+      @apply h-4 w-4 stroke-2;
     }
 
     > .label {
-      @apply text-sm/none font-normal shrink-0;
+      @apply text-sm font-normal shrink-0;
     }
 
     &:has(.icon):not(:has(.label)) {
       @apply p-2 aspect-square;
     }
 
-    &.primary {
+    &.btn--neutral {
+      @apply bg-surface-container text-on-surface;
+
+      &.btn--outline {
+        @apply bg-transparent border-outline/40 hover:bg-surface-container text-on-surface;
+      }
+    }
+
+    &.btn--primary {
       @apply bg-primary
       text-on-primary
       border-primary;
 
-      &.inverse {
+      &.btn--inverse {
         @apply bg-on-primary
         text-primary
         border-on-primary;
       }
 
-      &.outline {
+      &.btn--outline {
         @apply bg-transparent hover:bg-primary text-primary hover:text-on-primary;
       }
     }
   }
 
   .badge {
-    @apply self-start inline-flex items-center py-1 px-2 gap-2 rounded-sm border border-transparent;
+    @apply self-start inline-flex items-center py-1 px-2 gap-2 rounded-md border border-transparent;
 
-    > .badge-label {
-      @apply text-xs font-medium leading-none;
+    > .label {
+      @apply font-medium text-xs;
     }
 
-    > .badge-icon {
+    > .icon {
       @apply w-4 h-4 stroke-[1.75];
     }
 
-    &.badge--default {
+    &.badge--neutral {
       @apply text-on-surface bg-surface-container border-surface-container;
     }
 
     &.badge--primary {
-      @apply text-on-primary-container bg-primary-container border-primary-container;
+      @apply text-primary bg-primary-container border-primary-container;
     }
 
     &.badge--danger {
