@@ -1,0 +1,37 @@
+{
+  "$schema": "https://getcomposer.org/schema.json",
+  "name": "karsa/karsa-start",
+  "description": "A WordPress starter theme made with based on TailPress.",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Blank",
+      "email": "blank@blank.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "TailPress\\": "inc/core/",
+      "KarsaStart\\": "inc/core/"
+    },
+    "files": [
+      "inc/core/class-tgm-plugin-activation.php"
+    ]
+  },
+  "require": {
+    "php": ">=8.0.2",
+    "tailpress/framework": "^5.0.5",
+    "automattic/jetpack-autoloader": "^2.10"
+  },
+  "require-dev": {
+    "tailpress/cli": "^5.0",
+    "symfony/var-dumper": "^7.4",
+    "php-stubs/wordpress-stubs": "^7.1"
+  },
+  "config": {
+    "allow-plugins": {
+      "automattic/jetpack-autoloader": true
+    }
+  }
+}

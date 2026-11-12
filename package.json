@@ -1,0 +1,20 @@
+{
+  "name": "karsa-start",
+  "version": "0.1.0",
+  "description": "KarsaStart theme assets compiler",
+  "author": ".",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3",
+    "vite": "^6.4.3"
+  },
+  "dependencies": {
+    "alpinejs": "^3.17.5",
+    "lucide": "^1.50.0"
+  }
+}

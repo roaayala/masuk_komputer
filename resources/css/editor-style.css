@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@import "./_fonts.css";
+@import "./_base.css";
+@import "./_theme.css";
+@import "./_custom.css";
+
+.entry-content,
+.block-editor-block-list__layout {
+  font-family: var(--font-sans);
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-outline, currentColor);
+  }
+}

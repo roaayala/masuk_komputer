@@ -1,0 +1,66 @@
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2
+    px-4 py-2
+    h-9
+    rounded-md
+    border border-transparent
+    cursor-pointer;
+
+    &:hover {
+      @apply hover:opacity-90;
+    }
+
+    > .icon {
+      @apply h-4 w-4 leading-none stroke-2;
+    }
+
+    > .label {
+      @apply text-sm/none font-normal shrink-0;
+    }
+
+    &:has(.icon):not(:has(.label)) {
+      @apply p-2 aspect-square;
+    }
+
+    &.primary {
+      @apply bg-primary
+      text-on-primary
+      border-primary;
+
+      &.inverse {
+        @apply bg-on-primary
+        text-primary
+        border-on-primary;
+      }
+
+      &.outline {
+        @apply bg-transparent hover:bg-primary text-primary hover:text-on-primary;
+      }
+    }
+  }
+
+  .badge {
+    @apply self-start inline-flex items-center py-1 px-2 gap-2 rounded-sm border border-transparent;
+
+    > .badge-label {
+      @apply text-xs font-medium leading-none;
+    }
+
+    > .badge-icon {
+      @apply w-4 h-4 stroke-[1.75];
+    }
+
+    &.badge--default {
+      @apply text-on-surface bg-surface-container border-surface-container;
+    }
+
+    &.badge--primary {
+      @apply text-on-primary-container bg-primary-container border-primary-container;
+    }
+
+    &.badge--danger {
+      @apply text-on-danger-container bg-danger-container border-danger-container;
+    }
+  }
+}

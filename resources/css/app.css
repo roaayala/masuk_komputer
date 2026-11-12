@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "./_fonts.css";
+@import "./_theme.css";
+@import "./_base.css";
+@import "./_components.css";
+@import "./_utilities.css";
+@import "./_custom.css" layer(utilities);
+
+@source '../../vendor/tailpress/framework/**/*.php';
+@source '../../vendor/tailpress/framework/**/**/*.php';

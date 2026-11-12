@@ -1,0 +1,83 @@
+.entry-content,
+.block-editor-block-list__layout {
+  @apply text-on-surface-variant;
+
+  :where(
+    .entry-content > *:not(li),
+    .block-editor-block-list__layout > *:not(li)
+  ) {
+    @apply mb-6;
+  }
+
+  /* :first-child,
+  :last-child {
+    @apply mt-0;
+  } */
+
+  /* HEADING */
+  :where(h2) {
+    @apply mb-3;
+  }
+
+  :where(h3),
+  :where(h4),
+  :where(h5) {
+    @apply mb-2;
+  }
+
+  :where(h6) {
+    @apply mb-1;
+  }
+
+  h2:has(+ h3),
+  h3:has(+ h4),
+  h4:has(+ h5),
+  h5:has(+ h6) {
+    @apply mb-4;
+  }
+
+  /* LISTS & NESTED LISTS */
+  p:has(+ ul),
+  p:has(+ ol) {
+    @apply mb-2;
+  }
+
+  :where(ul, ol) {
+    @apply pl-6;
+  }
+
+  :where(ul) {
+    @apply list-disc;
+  }
+
+  :where(ol) {
+    @apply list-decimal;
+  }
+
+  :where(li) {
+    @apply pl-2 mb-2;
+  }
+
+  :where(li:last-child) {
+    @apply mb-4;
+  }
+
+  :where(li > ul),
+  :where(li > ol) {
+    li:first-child {
+      @apply mt-2;
+    }
+  }
+
+  /* SEPARATOR */
+
+  /* QUOTES */
+
+  /* IMAGE */
+
+  /* PRE & CODE */
+
+  /* TABLE WRAPPER & CONTAINER */
+
+  /* COMMON */
+}

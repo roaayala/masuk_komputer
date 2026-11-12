@@ -1,0 +1,136 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "layout": {
+      "contentSize": "60rem",
+      "wideSize": "75rem"
+    },
+    "color": {
+      "palette": [
+        { "name": "White", "slug": "white", "color": "#ffffff" },
+        { "name": "Black", "slug": "black", "color": "#000000" },
+        { "name": "Neutral 50", "slug": "neutral-50", "color": "#f8fafc" },
+        { "name": "Neutral 100", "slug": "neutral-100", "color": "#f1f5f9" },
+        { "name": "Neutral 200", "slug": "neutral-200", "color": "#e2e8f0" },
+        { "name": "Neutral 300", "slug": "neutral-300", "color": "#cbd5e1" },
+        { "name": "Neutral 400", "slug": "neutral-400", "color": "#94a3b8" },
+        { "name": "Neutral 500", "slug": "neutral-500", "color": "#64748b" },
+        { "name": "Neutral 600", "slug": "neutral-600", "color": "#475569" },
+        { "name": "Neutral 700", "slug": "neutral-700", "color": "#334155" },
+        { "name": "Neutral 800", "slug": "neutral-800", "color": "#1e293b" },
+        { "name": "Neutral 900", "slug": "neutral-900", "color": "#0f172a" },
+        { "name": "Neutral 950", "slug": "neutral-950", "color": "#020617" },
+        { "name": "Blue 50", "slug": "blue-50", "color": "#eff6ff" },
+        { "name": "Blue 100", "slug": "blue-100", "color": "#dbeafe" },
+        { "name": "Blue 200", "slug": "blue-200", "color": "#bfdbfe" },
+        { "name": "Blue 300", "slug": "blue-300", "color": "#93c5fd" },
+        { "name": "Blue 400", "slug": "blue-400", "color": "#60a5fa" },
+        { "name": "Blue 500", "slug": "blue-500", "color": "#3b82f6" },
+        { "name": "Blue 600", "slug": "blue-600", "color": "#2563eb" },
+        { "name": "Blue 700", "slug": "blue-700", "color": "#1d4ed8" },
+        { "name": "Blue 800", "slug": "blue-800", "color": "#1e40af" },
+        { "name": "Blue 900", "slug": "blue-900", "color": "#1e3a8a" },
+        { "name": "Blue 950", "slug": "blue-950", "color": "#172554" },
+        { "name": "Red 100", "slug": "red-100", "color": "#fee2e2" },
+        { "name": "Red 600", "slug": "red-600", "color": "#dc2626" },
+        { "name": "Red 800", "slug": "red-800", "color": "#991b1b" },
+        { "name": "Green 100", "slug": "green-100", "color": "#dcfce7" },
+        { "name": "Green 600", "slug": "green-600", "color": "#16a34a" },
+        { "name": "Green 800", "slug": "green-800", "color": "#166534" }
+      ]
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "fontFamily": "'Geist Variable', ui-sans-serif, system-ui, sans-serif",
+          "name": "Font Sans",
+          "slug": "sans"
+        },
+        {
+          "fontFamily": "'Geist Mono Variable', ui-monospace, monospace",
+          "name": "Font Mono",
+          "slug": "mono"
+        }
+      ],
+
+      "fontSizes": [
+        {
+          "name": "2XS",
+          "slug": "2xs",
+          "size": "0.625rem"
+        },
+        {
+          "name": "XS",
+          "slug": "xs",
+          "size": "0.75rem"
+        },
+        {
+          "name": "SM",
+          "slug": "sm",
+          "size": "0.875rem"
+        },
+        {
+          "name": "Base",
+          "slug": "base",
+          "size": "1rem"
+        },
+        {
+          "name": "LG",
+          "slug": "lg",
+          "size": "1.2rem"
+        },
+        {
+          "name": "XL",
+          "slug": "xl",
+          "size": "1.44rem"
+        },
+        {
+          "name": "2XL",
+          "slug": "2xl",
+          "size": "1.728rem"
+        },
+        {
+          "name": "3XL",
+          "slug": "3xl",
+          "size": "2.074rem"
+        },
+        {
+          "name": "4XL",
+          "slug": "4xl",
+          "size": "2.488rem"
+        },
+        {
+          "name": "5XL",
+          "slug": "5xl",
+          "size": "2.986rem"
+        },
+        {
+          "name": "6XL",
+          "slug": "6xl",
+          "size": "3.583rem"
+        },
+        {
+          "name": "7XL",
+          "slug": "7xl",
+          "size": "4.3rem"
+        },
+        {
+          "name": "8XL",
+          "slug": "8xl",
+          "size": "5.16rem"
+        },
+        {
+          "name": "9XL",
+          "slug": "9xl",
+          "size": "6.192rem"
+        }
+      ]
+    }
+  },
+  "styles": {
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family--sans)"
+    }
+  }
+}
