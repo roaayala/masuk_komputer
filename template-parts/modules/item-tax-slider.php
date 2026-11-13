@@ -1,6 +1,6 @@
 <?php
 /**
- * Section: Item tax slider
+ * Module: Item tax slider
  * @package KarsaStart
  */
 

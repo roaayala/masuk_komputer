@@ -143,12 +143,61 @@ foreach ($featured_categories as $index => $category) {
     'items' => $product_in_category
   ]);
 }
-
-// 7. CTA MARKETPLACES
-Helpers::module('store/marketplace-cta', [
-  'title' => __('Kami juga ada di marketplace favorit kamu!', 'karsa_start'),
-  'section_classes' => 'bg-surface-bright border-t border-outline/20'
-]);
 ?>
 
+<?php
+// 7. CTA MARKETPLACES
+$marketplaces = [
+  [
+    'key' => 'shopee',
+    'url' => '#'
+  ],
+  [
+    'key' => 'tokopedia',
+    'url' => '#'
+  ],
+  [
+    'key' => 'blibli',
+    'url' => '#'
+  ],
+  [
+    'key' => 'lazada',
+    'url' => '#'
+  ]
+];
+?>
+
+<section class="py-8 md:py-12 bg-surface-bright border-t border-outline/20">
+  <div class="container">
+    <div class="flex flex-col items-center text-center gap-6">
+
+      <div class="max-w-md">
+        <h2>
+          <?= __('Kami juga ada di marketplace favorit kamu!', 'karsa_start') ?>
+        </h2>
+      </div>
+
+      <div class="w-full grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <?php foreach ($marketplaces as $marketplace): ?>
+
+          <a href="<?= esc_url($marketplace['url']) ?>" class="group block" target="_blank">
+            <div
+              class="w-full h-20 sm:h-30 p-4 bg-surface-bright rounded-lg border border-outline/20 hover:border-primary/40 shadow-sm flex items-center justify-center transition-border duration-150">
+              <?= Helpers::get_icon(
+                $marketplace['key'],
+                $marketplace['key'] == 'tokopedia'
+                ? 'h-6 sm:h-8 mt-1'
+                : ($marketplace['key'] ? 'h-7 sm:h-9' : 'h-8 sm:h-10')
+              ) ?>
+            </div>
+          </a>
+
+        <?php endforeach ?>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <?php get_footer(); ?>

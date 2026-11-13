@@ -1,6 +1,6 @@
 <?php
 /**
- * Component: Item slider
+ * Module: Item slider
  */
 
 $wrapper_classes = $args['wrapper_classes'] ?? 'bg-surface';

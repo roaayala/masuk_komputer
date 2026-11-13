@@ -35,7 +35,7 @@ $has_marketplace = $tokopedia_link || $shopee_link || $lazada_link || $blibli_li
 ?>
 
 <div
-  class="group w-full max-w-60 shrink-0 flex flex-col bg-surface-bright border border-outline/20 hover:border-outline/60 shadow-sm rounded-lg overflow-hidden">
+  class="group w-full max-w-60 shrink-0 flex flex-col border border-outline/20 hover:border-primary/40 shadow-sm rounded-lg overflow-hidden">
 
   <!-- thumbnail and floating badges -->
   <div class="relative aspect-square border border-outline/20 overflow-hidden">
