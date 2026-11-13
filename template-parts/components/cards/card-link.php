@@ -14,7 +14,7 @@ $description = $args['description'] ?? __(
 
 ?>
 
-<a href="<?= esc_url($url) ?>">
+<a href="<?= esc_url($url) ?>" class="block">
   <div
     class="h-full w-full p-6 flex flex-col gap-6 bg-surface-bright rounded-lg shadow-sm border border-primary/20 hover:border-primary/60">
     <div class="flex flex-col gap-4">

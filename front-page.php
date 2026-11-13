@@ -84,7 +84,7 @@ $featured_categories = !is_wp_error($product_categories) ? array_slice($product_
 // MODULES LIST
 // 1. HERO BANNER
 Helpers::module('hero-banner', [
-
+  'slides' => $hero_slides
 ]);
 
 // 2. CATEGORIES TAXONOMY SLIDER
