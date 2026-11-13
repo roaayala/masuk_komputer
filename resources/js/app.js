@@ -28,21 +28,21 @@ const initLucideIcons = () => {
       ChevronDown,
       ChevronLeft,
       ChevronRight,
-      Component,
-      Download,
       ExternalLink,
       Menu,
       X,
       Lightbulb,
       Phone,
-      Cpu,
       FileText,
       // page-about-us (MasukKomputer)
       List,
       Eye,
       MousePointerClick,
       UserGroup,
+      Component,
       // front-page (MasukKomputer)
+      Cpu,
+      Download,
     },
   });
 };

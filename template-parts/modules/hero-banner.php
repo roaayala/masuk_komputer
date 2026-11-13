@@ -24,22 +24,17 @@ $cards = $args['cards'] ?? [];
       <!-- RIGHT SIDE: QUICK ACTION CARDS (1 COLUMN ON DESKTOP) -->
       <?php if (!empty($cards)): ?>
         <div class="flex flex-col gap-4">
-
           <!-- CARD -->
-          <?php Helpers::component('cards/card-link', [
-            'icon' => 'cpu',
-            'title' => __('Simulasi Rakit PC', 'karsa_start'),
-            'description' => __('Kalkulasi komponen & estimasi daya watt secara presisi.', 'karsa_start'),
-          ]) ?>
+          <?php foreach ($cards as $card):
 
+            Helpers::component('cards/card-link', [
+              'icon' => $card['icon'],
+              'title' => $card['title'],
+              'description' => $card['description']
+            ]);
 
-          <?php Helpers::component('cards/card-link', [
-            'icon' => 'download',
-            'title' => __('Download Price List', 'karsa_start'),
-            'description' => __('Dapatkan katalog daftar harga komponen update terbaru.', 'karsa_start')
-          ]) ?>
+          endforeach; ?>
 
-          </a>
         </div>
 
       <?php endif ?>

@@ -4,8 +4,8 @@
  * @package KarsaStart
  */
 
-$url = $args['url'] ?? 'arrow-right';
-$icon = $args['icon'] ?? null;
+$url = $args['url'] ?? '#';
+$icon = $args['icon'] ?? 'arrow-right';
 $title = $args['title'] ?? __('Judul', 'karsa_start');
 $description = $args['description'] ?? __(
   'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores ullam harum omnis.',
@@ -21,7 +21,7 @@ $description = $args['description'] ?? __(
 
       <!-- Icon Container / Badge -->
       <div class="inline-flex self-end justify-center">
-        <i data-lucide="<?= esc_attr($icon) ?>" class="w-5 h-5 text-on-surface group-hover:text-primary"
+        <i data-lucide="<?= esc_attr($icon) ?>" class="w-4 h-4 text-on-surface group-hover:text-primary"
           aria-hidden="true"></i>
       </div>
 
