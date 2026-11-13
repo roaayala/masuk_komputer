@@ -88,12 +88,12 @@ Helpers::module('hero-banner', [
 ]);
 
 // 2. CATEGORIES TAXONOMY SLIDER
-Helpers::module('store/product-tax-slider', [
-  'section_classes' => 'bg-surface-bright',
+
+Helpers::module('item-tax-slider', [
+  'wrapper_classes' => 'bg-surface-bright',
   'tax' => $product_categories,
   'title' => __('Cari berdasarkan kategori!', 'karsa_start')
 ]);
-
 
 // 3. DISCOUNTED PRODUCTS SLIDER
 $discount_products = new WP_Query($discount_products_args);
@@ -115,8 +115,7 @@ Helpers::module('item-slider', [
 ]);
 
 // 5. BRANDS TAXONOMY SLIDER
-Helpers::module('store/product-tax-slider', [
-  'section_classes' => 'bg-surface',
+Helpers::module('item-tax-slider', [
   'tax' => $product_brands,
   'title' => __('Cari berdasarkan brand!', 'karsa_start')
 ]);
