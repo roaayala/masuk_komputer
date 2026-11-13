@@ -29,6 +29,19 @@ $hero_slides = [
   ],
 ];
 
+$hero_cards = [
+  [
+    'icon' => 'cpu',
+    'title' => __('Simulasi Rakit PC', 'karsa_start'),
+    'description' => __('Kalkulasi komponen & estimasi daya watt secara presisi.', 'karsa_start'),
+  ],
+  [
+    'icon' => 'download',
+    'title' => __('Download Price List', 'karsa_start'),
+    'description' => __('Dapatkan katalog daftar harga komponen update terbaru.', 'karsa_start')
+  ]
+];
+
 // Query Args: Products
 $products_args = [
   'post_type' => 'product',

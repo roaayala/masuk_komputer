@@ -3,6 +3,7 @@
  * Component: Card slider
  */
 
+$wrapper_classes = $args['wrapper_classes'] ?? '';
 $slides = $args['slides'] ?? [];
 
 if (empty($slides)) {
@@ -35,7 +36,7 @@ if (empty($slides)) {
             startTimer() { this.timer = setInterval(() => this.next(), 6000) },
             stopTimer() { clearInterval(this.timer) }
            }" x-init="startTimer()" @mouseenter="stopTimer()" @mouseleave="startTimer()"
-  class="md:col-span-2 rounded-lg border border-outline/20 overflow-hidden flex flex-col gap-6 justify-between p-6 md:p-8 bg-surface-bright shadow-sm">
+  class="<?= esc_attr($wrapper_classes) ?> rounded-lg border border-outline/20 overflow-hidden flex flex-col gap-6 justify-between p-6 md:p-8 bg-surface-bright shadow-sm">
 
   <?php foreach ($slides as $index => $slide): ?>
     <div x-show="active === <?= $index ?>" x-cloak x-transition:enter="transition ease-out duration-300"
