@@ -1,11 +1,11 @@
 <?php
 /**
- * Module: Default hero
+ * Module: Hero
  */
 
 use KarsaStart\Helpers;
 
-$wrapper_classes = $args['wrapper_classes'] ?? 'py-8 bg-surface-bright';
+$wrapper_classes = $args['wrapper_classes'] ?? 'bg-surface-bright';
 $title = $args['title'] ?? __('Judul Hero', 'karsa_start');
 $leading_text = $args['leading_text'] ?? __(
   'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores ullam harum omnis.',
@@ -26,7 +26,7 @@ $image_alt = $args['image_alt'] ?? 'Hero Image';
 
 ?>
 
-<section class="<?= esc_attr($wrapper_classes) ?>">
+<section class="py-8 md:py-12 <?= esc_attr($wrapper_classes) ?>">
   <div class="container">
     <div class="grid md:grid-cols-12 gap-8 items-center">
 
@@ -50,7 +50,7 @@ $image_alt = $args['image_alt'] ?? 'Hero Image';
                 <span class="label">
                   <?= esc_html($cta_primary_label) ?>
                 </span>
-                <i data-lucide="move-right" class="icon"></i>
+                <i data-lucide="arrow-right" class="icon"></i>
               </a>
             <?php endif; ?>
 

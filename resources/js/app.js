@@ -8,9 +8,14 @@ import {
   createIcons,
   Download,
   ExternalLink,
+  Eye,
   FileText,
+  Lightbulb,
+  List,
   Menu,
+  MousePointerClick,
   Phone,
+  UserGroup,
   X,
 } from "lucide";
 import Alpine from "alpinejs";
@@ -28,9 +33,16 @@ const initLucideIcons = () => {
       ExternalLink,
       Menu,
       X,
+      Lightbulb,
+      Phone,
       Cpu,
       FileText,
-      Phone,
+      // page-about-us (MasukKomputer)
+      List,
+      Eye,
+      MousePointerClick,
+      UserGroup,
+      // front-page (MasukKomputer)
     },
   });
 };
