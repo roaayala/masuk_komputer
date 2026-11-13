@@ -91,7 +91,7 @@ $has_marketplace = $tokopedia_link || $shopee_link || $lazada_link || $blibli_li
 
       <!-- stock status -->
       <?php if (!empty($stock_status)): ?>
-        <span class="text-[.625rem] font-medium text-on-surface-subtle ml-auto">
+        <span class="text-2xs font-medium text-on-surface-subtle ml-auto">
           <?= esc_html(is_array($stock_status) ? ($stock_status['label'] ?? '') : $stock_status) ?>
         </span>
       <?php endif ?>

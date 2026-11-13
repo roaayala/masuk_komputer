@@ -25,9 +25,9 @@ if (!($products instanceof \WP_Query) || !$products->have_posts()) {
 
       <?php if ($url_link): ?>
         <a href="<?= esc_url($url_link ?: '#') ?>"
-          class="font-medium text-sm text-primary flex items-center gap-1.5 hover:underline group">
+          class="font-medium text-sm text-primary flex items-center gap-2 hover:underline group">
           <?= esc_html($url_label) ?>
-          <i data-lucide="move-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+          <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
         </a>
       <?php endif ?>
     </div>
@@ -52,6 +52,7 @@ if (!($products instanceof \WP_Query) || !$products->have_posts()) {
             'blibli_link' => get_field('blibli_link')
           ]);
         }
+        wp_reset_postdata();
       }
       ?>
     </div>

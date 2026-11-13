@@ -97,6 +97,13 @@ Helpers::module('store/product-tax-slider', [
 
 // 3. DISCOUNTED PRODUCTS SLIDER
 $discount_products = new WP_Query($discount_products_args);
+Helpers::module('item-slider', [
+  'title' => __('Lagi diskon!', 'karsa_start'),
+  'url_link' => get_post_type_archive_link('product'),
+  'url_label' => __('Lebih Banyak', 'karsa_start'),
+  'items' => $discount_products
+]);
+
 Helpers::module('store/product-slider', [
   'section_classes' => 'bg-surface',
   'title' => __('Lagi diskon!', 'karsa_start'),
