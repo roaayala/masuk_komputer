@@ -104,25 +104,15 @@ Helpers::module('item-slider', [
   'items' => $discount_products
 ]);
 
-Helpers::module('store/product-slider', [
-  'section_classes' => 'bg-surface',
-  'title' => __('Lagi diskon!', 'karsa_start'),
-  'url_link' => get_post_type_archive_link('product') ?: '#',
-  'url_label' => __('Lebih Banyak', 'karsa_start'),
-  'products' => $discount_products
-]);
-wp_reset_postdata();
-
 // 4. NEWEST PRODUCTS SLIDER
 $newest_products = new WP_Query($products_args);
-Helpers::module('store/product-slider', [
-  'section_classes' => 'bg-surface-bright',
+Helpers::module('item-slider', [
+  'wrapper_classes' => 'bg-surface-bright',
   'title' => __('Baru banget di toko!', 'karsa_start'),
-  'url_link' => get_post_type_archive_link('product') ?: '#',
+  'url_link' => get_post_type_archive_link('product'),
   'url_label' => __('Lebih Banyak', 'karsa_start'),
-  'products' => $newest_products
+  'items' => $newest_products
 ]);
-wp_reset_postdata();
 
 // 5. BRANDS TAXONOMY SLIDER
 Helpers::module('store/product-tax-slider', [
@@ -146,15 +136,13 @@ foreach ($featured_categories as $index => $category) {
   // Alternating background color based on index
   $bg_class = ($index % 2 === 0) ? 'bg-surface-bright' : 'bg-surface';
 
-  Helpers::module('store/product-slider', [
-    'section_classes' => $bg_class,
+  Helpers::module('item-slider', [
+    'wrapper_classes' => $bg_class,
     'title' => sprintf(__('Terbaru di %s', 'karsa_start'), $category->name),
     'url_link' => get_term_link($category),
     'url_label' => __('Lebih Banyak', 'karsa_start'),
-    'products' => $product_in_category
+    'items' => $product_in_category
   ]);
-
-  wp_reset_postdata();
 }
 
 // 7. CTA MARKETPLACES
