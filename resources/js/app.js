@@ -4,31 +4,42 @@ import {
   ChevronLeft,
   ChevronRight,
   Component,
+  Cpu,
   createIcons,
   Download,
-  Hamburger,
+  ExternalLink,
+  FileText,
+  Menu,
+  Phone,
+  X,
 } from "lucide";
 import Alpine from "alpinejs";
 
 const initLucideIcons = () => {
   createIcons({
     icons: {
-      ChevronDown,
-      ChevronRight,
-      ChevronLeft,
-      Hamburger,
+      // common
       ArrowRight,
+      ChevronDown,
+      ChevronLeft,
+      ChevronRight,
       Component,
       Download,
+      ExternalLink,
+      Menu,
+      X,
+      Cpu,
+      FileText,
+      Phone,
     },
   });
 };
 
 window.initLucideIcons = initLucideIcons;
 
+window.Alpine = Alpine;
+Alpine.start();
+
 document.addEventListener("DOMContentLoaded", () => {
   initLucideIcons();
 });
-
-window.Alpine = Alpine;
-Alpine.start();

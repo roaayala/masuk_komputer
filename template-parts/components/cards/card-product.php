@@ -48,7 +48,7 @@ $has_marketplace = $tokopedia_link || $shopee_link || $lazada_link || $blibli_li
     <?php if ($discount_rate > 0): ?>
       <div class="absolute z-10 top-2 right-2">
         <span class="badge badge--danger">
-          <span class="badge-label">
+          <span class="label">
             -<?= esc_html($discount_rate) ?>%
           </span>
         </span>
@@ -60,8 +60,8 @@ $has_marketplace = $tokopedia_link || $shopee_link || $lazada_link || $blibli_li
       <div class="absolute top-2 left-2 flex flex-col gap-2">
         <?php foreach ($categories as $category): ?>
           <?php if ($category->parent == 0): ?>
-            <span class="badge badge--default">
-              <span class="badge-label">
+            <span class="badge badge--neutral">
+              <span class="label">
                 <?= esc_html($category->name) ?>
               </span>
             </span>
@@ -80,7 +80,7 @@ $has_marketplace = $tokopedia_link || $shopee_link || $lazada_link || $blibli_li
           <?php foreach ($brands as $brand): ?>
             <?php if ($brand->parent == 0): ?>
               <span class="badge badge--primary">
-                <span class="badge-label">
+                <span class="label">
                   <?= esc_html($brand->name) ?>
                 </span>
               </span>
@@ -122,7 +122,7 @@ $has_marketplace = $tokopedia_link || $shopee_link || $lazada_link || $blibli_li
 
     <!-- cta -->
     <div class="flex flex-col gap-4">
-      <a href="#" target="_blank" class="btn primary w-full">
+      <a href="#" target="_blank" class="btn btn--primary w-full">
         <i data-lucide="phone" class="icon"></i>
         <span class="label"><?php _e('Hubungi kami', 'karsa_start') ?></span>
       </a>

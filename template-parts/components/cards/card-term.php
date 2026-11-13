@@ -20,13 +20,13 @@ if (is_wp_error($url))
 
 <a href="<?= esc_url($url) ?>" class="group block">
   <div
-    class="aspect-video w-40 p-6 bg-surface-bright border border-outline/20 hover:border-outline/60 shadow-sm rounded-lg flex flex-col gap-4 justify-between transition-border duration-150">
+    class="aspect-video w-40 p-6 bg-surface-bright border border-outline/20 hover:border-primary/40 shadow-sm rounded-lg flex flex-col gap-4 justify-between transition-border duration-150">
 
     <h3 class="text-base group-hover:text-primary transition-colors">
       <?= esc_html($title) ?>
     </h3>
 
-    <i data-lucide="move-right" class="w-4 h-4 text-on-surface self-end"></i>
+    <i data-lucide="arrow-right" class="w-4 h-4 text-on-surface self-end"></i>
 
   </div>
 </a>

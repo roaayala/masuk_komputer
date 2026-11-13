@@ -3,7 +3,7 @@
  * Component: Card feature
  * @package KarsaStart
  */
-$size = $args['size'] ?? 'default';
+
 $icon = $args['icon'] ?? null;
 $title = $args['title'] ?? __('Judul Fitur', 'karsa_start');
 $description = $args['description'] ?? __(
@@ -26,10 +26,10 @@ $description = $args['description'] ?? __(
 
     <!-- Title & Description -->
     <div class="flex flex-col gap-1">
-      <h3 class="<?= $size === 'default' ? esc_attr('text-lg') : esc_attr('text-base') ?>">
+      <h3 class="text-lg">
         <?= esc_html($title) ?>
       </h3>
-      <p class="<?= $size === 'default' ? esc_attr('text-sm') : esc_attr('text-xs') ?> text-on-surface-subtle">
+      <p class="text-sm text-on-surface-subtle">
         <?= esc_html($description) ?>
       </p>
     </div>
