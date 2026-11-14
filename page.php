@@ -1,4 +1,6 @@
 <?php
+
+use KarsaStart\Helpers;
 /**
  * View: Root page
  * @package KarsaStart
@@ -14,7 +16,10 @@ while (have_posts()):
   <article id="post-<?php the_ID(); ?>" <?php post_class('flex-1 py-8 bg-surface-bright'); ?>>
     <div class="container content-container">
       <div class="flex flex-col gap-8">
+
         <header class="flex flex-col gap-2">
+          <?php Helpers::component('breadchumb') ?>
+
           <h1>
             <?= esc_html(get_the_title()) ?>
           </h1>

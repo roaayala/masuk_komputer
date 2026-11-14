@@ -11,15 +11,19 @@ get_header();
 // Page View Here 
 while (have_posts()):
   the_post(); ?>
-  <!-- Hero -->
-  <?php Helpers::module('hero', [
-    'title' => get_the_title(),
-    'leading_text' => __(
-      'Selamat datang di MasukKomputer. Kami adalah platform penyedia informasi, katalog komponen komputer, dan simulasi perakitan PC yang dirancang untuk membantu antusias teknologi, gamer, creator, hingga profesional dalam menemukan perangkat keras terbaik sesuai kebutuhan.',
-      'karsa_start'
-    ),
-  ]) ?>
-
+  <div class="bg-surface-bright">
+    <div class="container py-4">
+      <?php Helpers::component('breadchumb') ?>
+    </div>
+    <!-- Hero -->
+    <?php Helpers::module('hero', [
+      'title' => get_the_title(),
+      'leading_text' => __(
+        'Selamat datang di MasukKomputer. Kami adalah platform penyedia informasi, katalog komponen komputer, dan simulasi perakitan PC yang dirancang untuk membantu antusias teknologi, gamer, creator, hingga profesional dalam menemukan perangkat keras terbaik sesuai kebutuhan.',
+        'karsa_start'
+      ),
+    ]) ?>
+  </div>
   <!-- Visi dan Misi  -->
   <?php
   $vision_mission_contents = [
@@ -55,7 +59,6 @@ while (have_posts()):
     'items' => $vision_mission_contents
   ]);
   ?>
-
   <!-- Layanan Utama -->
   <?php
   $main_service_contents = [

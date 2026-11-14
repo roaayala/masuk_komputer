@@ -10,17 +10,85 @@ global $wp_query;
 $total_products = $wp_query->found_posts;
 $current_sort = $_GET['sort'] ?? 'newest';
 
+$breadcrumb_items = [];
+$product_archive_url = get_post_type_archive_link('product');
+
+if (is_post_type_archive('product')) {
+  $breadcrumb_items[] = [
+    'label' => __('Semua produk', 'karsa_start'),
+    'url' => null,
+  ];
+} else {
+  foreach (['product-category', 'product-brand'] as $taxonomy) {
+    if (!is_tax($taxonomy)) {
+      continue;
+    }
+
+    $breadcrumb_items[] = [
+      'label' => __('Produk', 'karsa_start'),
+      'url' => $product_archive_url,
+    ];
+
+    $term = get_queried_object();
+
+    if ($term instanceof \WP_Term) {
+
+      if ($term->parent !== 0) {
+        $ancestors = array_reverse(get_ancestors($term->term_id, $taxonomy, 'taxonomy'));
+
+        foreach ($ancestors as $ancestor_id) {
+          $ancestor = get_term($ancestor_id, $taxonomy);
+          if ($ancestor instanceof \WP_Term && !is_wp_error($ancestor)) {
+            $ancestor_link = get_term_link($ancestor);
+            $breadcrumb_items[] = [
+              'label' => $ancestor->name,
+              'url' => !is_wp_error($ancestor_link) ? $ancestor_link : null,
+            ];
+          }
+        }
+      }
+
+      $breadcrumb_items[] = [
+        'label' => $term->name,
+        'url' => null,
+      ];
+    }
+
+    break;
+  }
+}
+
+
 ?>
 
-<div class="flex-1 bg-surface">
+<div class="flex-1 py-8 md:py-12 bg-surface-bright flex flex-col gap-8">
 
   <!-- 1. PAGE HEADER -->
-  <?php Helpers::module('headers/page-header', [
-    'title' => get_the_archive_title(),
-    'subtitle' => wp_strip_all_tags(get_the_archive_description()),
-  ]); ?>
+  <header class="">
 
-  <section class="py-8 md:py-12">
+    <div class="container">
+      <div class="flex flex-col gap-4">
+        <?php Helpers::component('breadchumb', [
+          'items' => $breadcrumb_items,
+        ]) ?>
+
+        <div>
+          <h1>
+            <?php if (is_post_type_archive('product')): ?>
+              <?= esc_html__('Semua produk', 'karsa_start'); ?>
+            <?php elseif (is_tax('product-category')): ?>
+              <?= esc_html(sprintf(__('Semua %s', 'karsa_start'), mb_strtolower(single_term_title('', false)))); ?>
+            <?php elseif (is_tax('product-brand')): ?>
+              <?= esc_html(sprintf(__('Semua %s', 'karsa_start'), single_term_title('', false))); ?>
+            <?php endif; ?>
+          </h1>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <section>
     <div class="container flex flex-col gap-6">
 
       <!-- 2. TOOLBAR (JUMLAH PRODUK & SORTING) -->
