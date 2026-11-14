@@ -66,7 +66,6 @@ $last_index = count($items) - 1;
         <?php endif; ?>
       </li>
 
-
     <?php endforeach; ?>
   </ol>
 </nav>

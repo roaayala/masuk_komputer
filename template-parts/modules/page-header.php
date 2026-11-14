@@ -5,19 +5,20 @@ use KarsaStart\Helpers;
  * @package KarsaStart
  */
 
-$breadcrumb_items = $args['breadchumb_items'] ?? [];
+$breadcrumb_items = $args['breadcrumb_items'] ?? [];
+$show_breadcrumb = $args['show_breadcrumb'] ?? true;
 $title = $args['title'] ?? 'Title';
 ?>
 
 <header>
   <div class="container">
     <div class="flex flex-col gap-2">
-      <?php if (!empty($breadcrumb_items)):
-        Helpers::component('breadchumb', ['items' => $breadcrumb_items]);
+      <?php if ($show_breadcrumb):
+        Helpers::component('breadcrumb', ['items' => $breadcrumb_items]);
       endif; ?>
 
       <div>
-        <h1> <?= esc_html($title) ?></h1>
+        <h1><?= esc_html($title) ?></h1>
       </div>
     </div>
   </div>

@@ -133,4 +133,59 @@ class Helpers
 
     return array_map($normalize, $items);
   }
+
+  public static function get_archive_breadcrumb_items(
+    string $post_type,
+    array $taxonomies = [],
+    array $labels = []
+  ): array {
+    $items = [];
+    $post_type_obj = get_post_type_object($post_type);
+    $archive_url = get_post_type_archive_link($post_type) ?: null;
+
+    $root_label = $labels['root'] ?? ($post_type_obj->labels?->name ?? ucfirst($post_type));
+    $all_label = $labels['all'] ?? sprintf(__('Semua %s', 'karsa_start'), mb_strtolower($root_label));
+
+    if (is_post_type_archive($post_type)) {
+      $items[] = [
+        'label' => $all_label,
+        'url' => null,
+      ];
+      return $items;
+    }
+
+    if (!empty($taxonomies) && is_tax($taxonomies)) {
+      if ($archive_url) {
+        $items[] = [
+          'label' => $root_label,
+          'url' => $archive_url,
+        ];
+      }
+
+      $term = get_queried_object();
+      if ($term instanceof \WP_Term) {
+        if ($term->parent !== 0) {
+          $ancestors = array_reverse(get_ancestors($term->term_id, $term->taxonomy, 'taxonomy'));
+
+          foreach ($ancestors as $ancestor_id) {
+            $ancestor = get_term($ancestor_id, $term->taxonomy);
+            if ($ancestor instanceof \WP_Term && !is_wp_error($ancestor)) {
+              $ancestor_link = get_term_link($ancestor);
+              $items[] = [
+                'label' => $ancestor->name,
+                'url' => !is_wp_error($ancestor_link) ? $ancestor_link : null,
+              ];
+            }
+          }
+        }
+
+        $items[] = [
+          'label' => $term->name,
+          'url' => null,
+        ];
+      }
+    }
+
+    return $items;
+  }
 }
