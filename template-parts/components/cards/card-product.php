@@ -1,19 +1,18 @@
 <?php
-
-use KarsaStart\Helpers;
-
 /**
  * Component: Card for product
  * @package KarsaStart
  */
+
+use KarsaStart\Helpers;
 
 
 $url = $args['url'] ?? null;
 
 $name = $args['name'] ?? __('Nama Produk', 'karsa_start');
 
-$image_url = $args['image_url']
-  ?? get_template_directory_uri() . '/public/images/fallback-2-undraw.png';
+$image_url = ($args['image_url'] ?? false)
+  ?: get_template_directory_uri() . '/public/images/fallback-2-undraw.png';
 
 $discount_rate = $args['discount_rate'] ?? 0;
 $price = $args['price'] ?? 0;
