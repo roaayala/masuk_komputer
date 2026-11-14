@@ -4,17 +4,14 @@
  * @package KarsaStart
  */
 
-?>
+use KarsaStart\Helpers;
+get_header();
 
-<?php get_header(); ?>
+// Archive view here
+$is_store_archive = is_post_type_archive('product') || is_tax(['product-brand', 'product-category']);
 
-<!-- Archive view here -->
-<div id="page" class="flex-1 bg-surface-bright">
-  <div class="container">
-    <h1>Archive</h1>
-  </div>
+if ($is_store_archive) {
+  Helpers::view('archive-product');
+}
 
-</div>
-
-
-<?php get_footer(); ?>
+get_footer();
