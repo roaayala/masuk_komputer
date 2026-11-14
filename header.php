@@ -1,6 +1,6 @@
 <?php
 /**
- * View: Root Header
+ * View: Root header
  * @package KarsaStart
  */
 

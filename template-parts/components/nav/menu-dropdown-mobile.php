@@ -23,7 +23,7 @@ if (empty($items)) {
     <i data-lucide="chevron-down" class="w-4 h-4 transition-transform" :class="{ 'rotate-180': expanded }"></i>
   </button>
 
-  <div x-show="expanded" class="flex flex-col gap-2">
+  <div x-show="expanded" class="flex flex-col gap-2" x-transition>
     <?php foreach ($items as $item): ?>
       <div class="flex flex-col gap-2">
         <a href="<?= esc_url($item['url']) ?>" class="flex text-sm text-on-surface-variant hover:underline">

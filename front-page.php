@@ -1,6 +1,6 @@
 <?php
 /**
- * Template: Root Front Page
+ * View: Root front page
  * @package KarsaStart
  */
 

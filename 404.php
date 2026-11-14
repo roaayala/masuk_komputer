@@ -1,6 +1,6 @@
 <?php
 /**
- * Template: Root 404
+ * View: Root 404 page
  * @package KarsaStart
  */
 

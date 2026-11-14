@@ -1,6 +1,6 @@
 <?php
 /**
- * Template: Root Archive Template
+ * View: Root archive
  * @package KarsaStart
  */
 
@@ -8,6 +8,13 @@
 
 <?php get_header(); ?>
 
-<!-- Archive Template Here -->
+<!-- Archive view here -->
+<div id="page" class="flex-1 bg-surface-bright">
+  <div class="container">
+    <h1>Archive</h1>
+  </div>
+
+</div>
+
 
 <?php get_footer(); ?>
