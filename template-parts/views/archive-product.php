@@ -62,31 +62,23 @@ if (is_post_type_archive('product')) {
 ?>
 
 <div class="flex-1 py-8 md:py-12 bg-surface-bright flex flex-col gap-8">
-
   <!-- 1. PAGE HEADER -->
-  <header class="">
+  <?php
+  $title;
 
-    <div class="container">
-      <div class="flex flex-col gap-4">
-        <?php Helpers::component('breadchumb', [
-          'items' => $breadcrumb_items,
-        ]) ?>
+  if (is_post_type_archive('product')) {
+    $title = __('Semua produk', 'karsa_start');
+  } elseif (is_tax('product-category')) {
+    $title = sprintf(__('Semua %s', 'karsa_start'), mb_strtolower(single_term_title('', false)));
+  } elseif (is_tax('product-brand')) {
+    $title = sprintf(__('Semua %s', 'karsa_start'), single_term_title('', false));
+  }
 
-        <div>
-          <h1>
-            <?php if (is_post_type_archive('product')): ?>
-              <?= esc_html__('Semua produk', 'karsa_start'); ?>
-            <?php elseif (is_tax('product-category')): ?>
-              <?= esc_html(sprintf(__('Semua %s', 'karsa_start'), mb_strtolower(single_term_title('', false)))); ?>
-            <?php elseif (is_tax('product-brand')): ?>
-              <?= esc_html(sprintf(__('Semua %s', 'karsa_start'), single_term_title('', false))); ?>
-            <?php endif; ?>
-          </h1>
-        </div>
+  Helpers::module('page-header', ['breadchumb_items' => $breadcrumb_items, 'title' => $title]);
+  ?>
 
-      </div>
-    </div>
-  </header>
+
+
 
   <section>
     <div class="container flex flex-col gap-6">
