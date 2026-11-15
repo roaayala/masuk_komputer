@@ -14,7 +14,7 @@ $current_limit = in_array($raw_limit, $allowed_limits, true) ? $raw_limit : 12;
 $current_sort = sanitize_text_field(wp_unslash($_GET['sort'] ?? 'newest'));
 $base_archive_url = strtok(get_pagenum_link(1), '?');
 
-
+$has_active_filter = ($current_sort !== 'newest') || ($current_limit !== 12);
 ?>
 <div class="flex-1 py-8 md:py-12 bg-surface-bright flex flex-col gap-8">
   <!-- PAGE HEADER -->
@@ -53,7 +53,7 @@ $base_archive_url = strtok(get_pagenum_link(1), '?');
           ); ?>
         </p>
 
-        <form method="get" action="<?= esc_url($base_archive_url); ?>" class="flex items-center gap-4">
+        <form method="get" action="<?= esc_url($base_archive_url); ?>" class="flex flex-wrap items-center gap-4">
           <div class="flex items-center gap-2">
             <label for="sort-products" class="text-xs text-on-surface-subtle">
               <?= esc_html__('Tampilkan:', 'karsa_start'); ?>
@@ -97,6 +97,12 @@ $base_archive_url = strtok(get_pagenum_link(1), '?');
             </div>
 
           </div>
+
+          <?php if ($has_active_filter): ?>
+            <a href=<?= esc_url($base_archive_url); ?>" class="text-xs text-on-surface-subtle hover:text-primary">
+              <?= esc_html__('Bersihkan Filter', 'karsa_start'); ?>
+            </a>
+          <?php endif ?>
         </form>
       </div>
 
