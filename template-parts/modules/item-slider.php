@@ -42,6 +42,7 @@ if (!($items instanceof \WP_Query) || !$items->have_posts()) {
           while ($items->have_posts()) {
             $items->the_post();
             get_template_part('template-parts/components/cards/card', 'product', [
+              'wrapper_classes' => 'max-w-60',
               'name' => get_the_title(),
               'url' => get_the_permalink(),
               'image_url' => get_the_post_thumbnail_url(get_the_ID(), 'medium'),

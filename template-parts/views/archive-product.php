@@ -8,10 +8,14 @@ use KarsaStart\Helpers;
 
 global $wp_query;
 $total_products = $wp_query->found_posts;
-$current_sort = $_GET['sort'] ?? 'newest';
+$allowed_limits = [6, 12, 24];
+$raw_limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 12;
+$current_limit = in_array($raw_limit, $allowed_limits, true) ? $raw_limit : 12;
+$current_sort = sanitize_text_field(wp_unslash($_GET['sort'] ?? 'newest'));
+$base_archive_url = strtok(get_pagenum_link(1), '?');
+
 
 ?>
-
 <div class="flex-1 py-8 md:py-12 bg-surface-bright flex flex-col gap-8">
   <!-- PAGE HEADER -->
   <?php
@@ -40,7 +44,7 @@ $current_sort = $_GET['sort'] ?? 'newest';
 
   <!-- PRODUCT GRID -->
   <section>
-    <div class="container flex flex-col gap-6">
+    <div class="container flex flex-col gap-8">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-outline/20">
         <p class="text-sm text-on-surface-variant">
           <?= sprintf(
@@ -49,31 +53,54 @@ $current_sort = $_GET['sort'] ?? 'newest';
           ); ?>
         </p>
 
-        <form method="get" class="flex items-center gap-2">
-          <label for="sort-products" class="text-xs text-on-surface-subtle">
-            <?= esc_html__('Urutkan:', 'karsa_start'); ?>
-          </label>
+        <form method="get" action="<?= esc_url($base_archive_url); ?>" class="flex items-center gap-4">
+          <div class="flex items-center gap-2">
+            <label for="sort-products" class="text-xs text-on-surface-subtle">
+              <?= esc_html__('Tampilkan:', 'karsa_start'); ?>
+            </label>
 
-          <div class="relative inline-flex items-center">
-            <select id="sort-products" name="sort" onchange="this.form.submit()"
-              class="appearance-none text-xs bg-surface border border-outline/40 rounded-md px-2 py-1 text-on-surface focus:outline-none focus:border-primary cursor-pointer">
-              <option value="newest" <?php selected($current_sort, 'newest'); ?>>
-                <?= esc_html__('Terbaru', 'karsa_start'); ?>
-              </option>
-              <option value="price_asc" <?php selected($current_sort, 'price_asc'); ?>>
-                <?= esc_html__('Harga Terendah', 'karsa_start'); ?>
-              </option>
-              <option value="price_desc" <?php selected($current_sort, 'price_desc'); ?>>
-                <?= esc_html__('Harga Tertinggi', 'karsa_start'); ?>
-              </option>
-            </select>
-            <i data-lucide="chevron-down" class="w-4 h-4 text-on-surface-subtle absolute right-2 pointer-events-none"
-              aria-hidden="true"></i>
+            <div class="relative inline-flex items-center">
+              <select id="limit-products" name="limit" onchange="this.form.submit()"
+                class="appearance-none text-xs bg-surface border border-outline/40 rounded-md pl-2 pr-6 py-1 text-on-surface focus:outline-none focus:border-primary cursor-pointer">
+                <?php foreach ($allowed_limits as $limit_option): ?>
+                  <option value="<?= esc_attr($limit_option); ?>" <?php selected($current_limit, $limit_option); ?>>
+                    <?= esc_html($limit_option); ?>
+                  </option>
+                <?php endforeach; ?>
+              </select>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-on-surface-subtle absolute right-2 pointer-events-none"
+                aria-hidden="true"></i>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <label for="sort-products" class="text-xs text-on-surface-subtle">
+              <?= esc_html__('Urutkan:', 'karsa_start'); ?>
+            </label>
+
+            <div class="relative inline-flex items-center">
+              <select id="sort-products" name="sort" onchange="this.form.submit()"
+                class="appearance-none text-xs bg-surface border border-outline/40 rounded-md pl-2 pr-6 py-1 text-on-surface focus:outline-none focus:border-primary cursor-pointer">
+                <option value="newest" <?php selected($current_sort, 'newest'); ?>>
+                  <?= esc_html__('Terbaru', 'karsa_start'); ?>
+                </option>
+                <option value="price_asc" <?php selected($current_sort, 'price_asc'); ?>>
+                  <?= esc_html__('Harga Terendah', 'karsa_start'); ?>
+                </option>
+                <option value="price_desc" <?php selected($current_sort, 'price_desc'); ?>>
+                  <?= esc_html__('Harga Tertinggi', 'karsa_start'); ?>
+                </option>
+              </select>
+
+              <i data-lucide="chevron-down" class="w-4 h-4 text-on-surface-subtle absolute right-2 pointer-events-none"
+                aria-hidden="true"></i>
+            </div>
+
           </div>
         </form>
       </div>
 
-      <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
+      <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4">
         <?php while (have_posts()):
           the_post(); ?>
 

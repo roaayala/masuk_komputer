@@ -6,11 +6,10 @@
 
 use KarsaStart\Helpers;
 
+$wrapper_classes = $args['wrapper_classes'] ?? '';
 
 $url = $args['url'] ?? null;
-
 $name = $args['name'] ?? __('Nama Produk', 'karsa_start');
-
 $image_url = ($args['image_url'] ?? false)
   ?: get_template_directory_uri() . '/public/images/fallback-2-undraw.png';
 
@@ -29,12 +28,11 @@ $lazada_link = $args['lazada_link'] != '#' ?: null;
 $blibli_link = $args['blibli_link'] != '#' ?: null;
 $shopee_link = $args['shopee_link'] != '#' ?: null;
 
-
 $has_marketplace = $tokopedia_link || $shopee_link || $lazada_link || $blibli_link;
 ?>
 
 <div
-  class="group w-full max-w-60 shrink-0 flex flex-col bg-surface-bright border border-outline/20 hover:border-primary/40 shadow-sm rounded-lg overflow-hidden">
+  class="group w-full shrink-0 flex flex-col bg-surface-bright border border-outline/20 hover:border-primary/40 shadow-sm rounded-lg overflow-hidden <?= esc_attr($wrapper_classes) ?>">
 
   <!-- thumbnail and floating badges -->
   <div class="relative aspect-square border border-outline/20 overflow-hidden">
