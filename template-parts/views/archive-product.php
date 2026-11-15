@@ -54,49 +54,33 @@ $has_active_filter = ($current_sort !== 'newest') || ($current_limit !== 12);
         </p>
 
         <form method="get" action="<?= esc_url($base_archive_url); ?>" class="flex flex-wrap items-center gap-4">
-          <div class="flex items-center gap-2">
-            <label for="sort-products" class="text-xs text-on-surface-subtle">
-              <?= esc_html__('Tampilkan:', 'karsa_start'); ?>
-            </label>
 
-            <div class="relative inline-flex items-center">
-              <select id="limit-products" name="limit" onchange="this.form.submit()"
-                class="appearance-none text-xs bg-surface border border-outline/40 rounded-md pl-2 pr-6 py-1 text-on-surface focus:outline-none focus:border-primary cursor-pointer">
-                <?php foreach ($allowed_limits as $limit_option): ?>
-                  <option value="<?= esc_attr($limit_option); ?>" <?php selected($current_limit, $limit_option); ?>>
-                    <?= esc_html($limit_option); ?>
-                  </option>
-                <?php endforeach; ?>
-              </select>
-              <i data-lucide="chevron-down" class="w-4 h-4 text-on-surface-subtle absolute right-2 pointer-events-none"
-                aria-hidden="true"></i>
-            </div>
-          </div>
+          <?php Helpers::component('select-dropdown', [
+            'id' => 'limit-products',
+            'name' => 'limit',
+            'label' => __('Tampilkan:', 'karsa_start'),
+            'selected' => $current_limit,
+            'auto_submit' => true,
+            'options' => [
+              '6' => '6',
+              '12' => '12',
+              '24' => '24',
+            ],
+          ]);
 
-          <div class="flex items-center gap-2">
-            <label for="sort-products" class="text-xs text-on-surface-subtle">
-              <?= esc_html__('Urutkan:', 'karsa_start'); ?>
-            </label>
-
-            <div class="relative inline-flex items-center">
-              <select id="sort-products" name="sort" onchange="this.form.submit()"
-                class="appearance-none text-xs bg-surface border border-outline/40 rounded-md pl-2 pr-6 py-1 text-on-surface focus:outline-none focus:border-primary cursor-pointer">
-                <option value="newest" <?php selected($current_sort, 'newest'); ?>>
-                  <?= esc_html__('Terbaru', 'karsa_start'); ?>
-                </option>
-                <option value="price_asc" <?php selected($current_sort, 'price_asc'); ?>>
-                  <?= esc_html__('Harga Terendah', 'karsa_start'); ?>
-                </option>
-                <option value="price_desc" <?php selected($current_sort, 'price_desc'); ?>>
-                  <?= esc_html__('Harga Tertinggi', 'karsa_start'); ?>
-                </option>
-              </select>
-
-              <i data-lucide="chevron-down" class="w-4 h-4 text-on-surface-subtle absolute right-2 pointer-events-none"
-                aria-hidden="true"></i>
-            </div>
-
-          </div>
+          Helpers::component('select-dropdown', [
+            'id' => 'sort-products',
+            'name' => 'sort',
+            'label' => __('Urutkan:', 'karsa_start'),
+            'selected' => $current_sort,
+            'auto_submit' => true,
+            'options' => [
+              'newest' => __('Terbaru', 'karsa_start'),
+              'price_asc' => __('Harga Terendah', 'karsa_start'),
+              'price_desc' => __('Harga Tertinggi', 'karsa_start'),
+            ],
+          ]);
+          ?>
 
           <?php if ($has_active_filter): ?>
             <a href=<?= esc_url($base_archive_url); ?>" class="text-xs text-on-surface-subtle hover:text-primary">
