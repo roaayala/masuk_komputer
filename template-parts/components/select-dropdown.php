@@ -48,13 +48,16 @@ foreach ($attributes as $attr_key => $attr_val) {
       <?= $auto_submit ? 'onchange="this.form.submit()"' : ''; ?>
       class="appearance-none text-xs bg-surface border border-outline/40 rounded-md pl-2 pr-6 py-1 text-on-surfacefocus:outline-none focus:border-primary cursor-pointer <?= esc_attr($select_class); ?>"
       <?= $extra_attrs; ?>>
+
       <?php if ($placeholder !== ''): ?>
         <option value="" <?php selected($selected, ''); ?>>
           <?= esc_html($placeholder); ?>
         </option>
       <?php endif; ?>
+
       <?php foreach ($options as $value => $option_label): ?>
-        <option value="<?= esc_attr((string) $value); ?>" <?php selected($selected, (string) $value); ?>>
+        <option value="<?= esc_attr((string) $value); ?>"
+          <?php selected($selected, (string) $value); ?>>
           <?= esc_html($option_label); ?>
         </option>
       <?php endforeach; ?>

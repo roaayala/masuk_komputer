@@ -64,15 +64,29 @@ $has_active_filter = ($current_sort !== 'newest')
       <form method="get" action="<?= esc_url($base_archive_url); ?>"
         class="flex flex-col gap-4 pb-6 border-b border-outline/20">
 
-        <p class="text-sm text-on-surface-variant mr-2">
-          <?= sprintf(
-            wp_kses(
-              __('Menampilkan <strong class="font-semibold text-on-surface">%d</strong> produk', 'karsa_start'),
-              ['strong' => ['class' => []]]
-            ),
-            $total_products
-          ); ?>
-        </p>
+        <?php Helpers::module('archive-toolbar', [
+          'total' => $total_products,
+          'item_label' => 'produk',
+          'reset_url' => $has_active_filter ? $base_archive_url : '',
+          'limit' => [
+            'id' => 'limit-products',
+            'selected' => $current_limit,
+            'options' => [
+              '6' => '6',
+              '12' => '12',
+              '24' => '24',
+            ],
+          ],
+          'sort' => [
+            'id' => 'sort-products',
+            'selected' => $current_sort,
+            'options' => [
+              'newest' => __('Terbaru', 'karsa_start'),
+              'price_asc' => __('Harga Terendah', 'karsa_start'),
+              'price_desc' => __('Harga Tertinggi', 'karsa_start'),
+            ],
+          ],
+        ]) ?>
 
         <div class="flex flex-wrap items-center gap-4">
           <?php if (!empty($category_options)): ?>
@@ -104,9 +118,9 @@ $has_active_filter = ($current_sort !== 'newest')
             'selected' => $current_stock,
             'auto_submit' => true,
             'options' => [
-              'ready' => __('Stok Tersedia', 'karsa_start'),
-              'indent' => __('Stok Indent', 'karsa_start'),
-              'out_of_stock' => __('Stok Habis', 'karsa_start'),
+              'ready' => __('Tersedia', 'karsa_start'),
+              'indent' => __('Indent', 'karsa_start'),
+              'out_of_stock' => __('Habis', 'karsa_start'),
             ],
           ]); ?>
 
@@ -119,39 +133,7 @@ $has_active_filter = ($current_sort !== 'newest')
           </label>
         </div>
 
-        <div class="flex flex-wrap items-center gap-4">
-          <?php Helpers::component('select-dropdown', [
-            'id' => 'limit-products',
-            'name' => 'limit',
-            'label' => __('Tampilkan:', 'karsa_start'),
-            'selected' => $current_limit,
-            'auto_submit' => true,
-            'options' => [
-              '6' => '6',
-              '12' => '12',
-              '24' => '24',
-            ],
-          ]); ?>
 
-          <?php Helpers::component('select-dropdown', [
-            'id' => 'sort-products',
-            'name' => 'sort',
-            'label' => __('Urutkan:', 'karsa_start'),
-            'selected' => $current_sort,
-            'auto_submit' => true,
-            'options' => [
-              'newest' => __('Terbaru', 'karsa_start'),
-              'price_asc' => __('Harga Terendah', 'karsa_start'),
-              'price_desc' => __('Harga Tertinggi', 'karsa_start'),
-            ],
-          ]); ?>
-
-          <?php if ($has_active_filter): ?>
-            <a href="<?= esc_url($base_archive_url); ?>" class="text-xs font-medium text-primary hover:underline">
-              <?= esc_html__('Bersihkan Filter', 'karsa_start'); ?>
-            </a>
-          <?php endif; ?>
-        </div>
       </form>
 
       <!-- Grid Produk / Empty State -->
