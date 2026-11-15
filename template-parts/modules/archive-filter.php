@@ -17,7 +17,7 @@ if (empty($active_dropdowns) && empty($checkboxes)) {
 }
 ?>
 
-<div class="flex flex-wrap items-center gap-3 <?= esc_attr($wrapper_class); ?>">
+<div class="flex flex-wrap items-center gap-4 <?= esc_attr($wrapper_class); ?>">
   <?php foreach ($active_dropdowns as $dropdown): ?>
     <?php Helpers::component('select-dropdown', [
       'id' => $dropdown['id'] ?? wp_unique_id('filter-'),

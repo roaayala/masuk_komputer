@@ -188,7 +188,7 @@ class Helpers
   /**
    * Mengambil daftar term sebagai array ['slug' => 'Nama Term'] untuk select-dropdown.
    */
-  public static function get_term_options(string $taxonomy): array
+  public static function get_term_options(string $taxonomy, bool $grouped = true): array
   {
     if (is_tax($taxonomy)) {
       return [];
@@ -203,6 +203,51 @@ class Helpers
       return [];
     }
 
-    return wp_list_pluck($terms, 'name', 'slug');
+    if (!$grouped || !is_taxonomy_hierarchical($taxonomy)) {
+      return wp_list_pluck($terms, 'name', 'slug');
+    }
+
+    $terms_by_id = [];
+    foreach ($terms as $term) {
+      $terms_by_id[$term->term_id] = $term;
+    }
+
+    $root_terms = [];
+    $children_by_root = [];
+
+    foreach ($terms as $term) {
+      if ($term->parent === 0 || !isset($terms_by_id[$term->parent])) {
+        $root_terms[$term->term_id] = $term;
+        continue;
+      }
+
+      $ancestor_id = $term->parent;
+      $depth = 1;
+      while (
+        isset($terms_by_id[$ancestor_id]) &&
+        $terms_by_id[$ancestor_id]->parent !== 0 &&
+        isset($terms_by_id[$terms_by_id[$ancestor_id]->parent])
+      ) {
+
+        $ancestor_id = $terms_by_id[$ancestor_id]->parent;
+        $depth++;
+      }
+
+      $prefix = $depth > 1 ? str_repeat('— ', $depth - 1) : '';
+      $children_by_root[$ancestor_id][$term->slug] = $prefix . $term->name;
+    }
+
+    $options = [];
+    foreach ($root_terms as $root_id => $root_term) {
+      if (!empty($children_by_root[$root_id])) {
+        $options[$root_term->name] = array_merge(
+          [$root_term->slug => sprintf(__('Semua %s', 'karsa_start'), $root_term->name)],
+          $children_by_root[$root_id]
+        );
+      } else {
+        $options[$root_term->slug] = $root_term->name;
+      }
+    }
+    return $options;
   }
 }

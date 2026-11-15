@@ -46,7 +46,7 @@ foreach ($attributes as $attr_key => $attr_val) {
       id="<?= esc_attr($id) ?>"
       name="<?= esc_attr($name) ?>"
       <?= $auto_submit ? 'onchange="this.form.submit()"' : ''; ?>
-      class="appearance-none text-xs bg-surface border border-outline/40 rounded-md pl-2 pr-6 py-1 text-on-surfacefocus:outline-none focus:border-primary cursor-pointer <?= esc_attr($select_class); ?>"
+      class="appearance-none text-xs bg-surface border border-outline/40 rounded-md pl-2 pr-7 py-1 text-on-surfacefocus:outline-none focus:border-primary cursor-pointer <?= esc_attr($select_class); ?>"
       <?= $extra_attrs; ?>>
 
       <?php if ($placeholder !== ''): ?>
@@ -55,11 +55,20 @@ foreach ($attributes as $attr_key => $attr_val) {
         </option>
       <?php endif; ?>
 
-      <?php foreach ($options as $value => $option_label): ?>
-        <option value="<?= esc_attr((string) $value); ?>"
-          <?php selected($selected, (string) $value); ?>>
-          <?= esc_html($option_label); ?>
-        </option>
+      <?php foreach ($options as $key => $option): ?>
+        <?php if (is_array($option)): ?>
+          <optgroup label="<?= esc_attr((string) $key); ?>">
+            <?php foreach ($option as $value => $option_label): ?>
+              <option value="<?= esc_attr((string) $value); ?>" <?php selected($selected, (string) $value); ?>>
+                <?= esc_html($option_label); ?>
+              </option>
+            <?php endforeach; ?>
+          </optgroup>
+        <?php else: ?>
+          <option value="<?= esc_attr((string) $key); ?>" <?php selected($selected, (string) $key); ?>>
+            <?= esc_html($option); ?>
+          </option>
+        <?php endif; ?>
       <?php endforeach; ?>
     </select>
     <i
