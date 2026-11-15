@@ -264,4 +264,25 @@ class Helpers
 
     return add_query_arg($remaining, $base_url);
   }
+  /**
+   * Render parameter GET aktif sebagai hidden input agar tidak hilang saat form lain di-submit.
+   */
+  public static function render_hidden_query_inputs(array $exclude_keys = []): void
+  {
+    $query = map_deep(wp_unslash($_GET), 'sanitize_text_field');
+    $exclude = array_flip(array_merge(['paged'], $exclude_keys));
+
+    foreach ($query as $key => $value) {
+      if (isset($exclude[$key]) || !is_scalar($value) || (string) $value === '') {
+        continue;
+      }
+
+      printf(
+        '<input type="hidden" name="%s" value="%s">' . "\n",
+        esc_attr((string) $key),
+        esc_attr((string) $value)
+      );
+    }
+  }
+
 }

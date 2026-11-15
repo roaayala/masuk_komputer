@@ -63,10 +63,12 @@ $reset_product_url = Helpers::get_reset_url(['category', 'brand', 'stock', 'on_s
 
   <!-- PRODUCT GRID -->
   <section>
-    <div class="container flex flex-col gap-8">
-      <!-- Unified Filter, Sort & Limit Form -->
+    <div class="container flex flex-col gap-6">
+      <!-- Archive Toolbar -->
       <form method="get" action="<?= esc_url($base_archive_url); ?>"
         class="flex flex-col gap-6 pb-6 border-b border-outline/20">
+
+        <?php Helpers::render_hidden_query_inputs(['limit', 'sort']); ?>
 
         <?php Helpers::module('archive-toolbar', [
           'total' => $total_products,
@@ -92,85 +94,101 @@ $reset_product_url = Helpers::get_reset_url(['category', 'brand', 'stock', 'on_s
           ],
         ]) ?>
 
-        <?php Helpers::module('archive-filter', [
-          'reset_url' => $has_product_filter ? $reset_product_url : '',
-          'dropdowns' => [
-            [
-              'id' => 'filter-category',
-              'name' => 'category',
-              'placeholder' => __('Semua Kategori', 'karsa_start'),
-              'selected' => $current_category,
-              'options' => $category_options,
-            ],
-            [
-              'id' => 'filter-brand',
-              'name' => 'brand',
-              'placeholder' => __('Semua Brand', 'karsa_start'),
-              'selected' => $current_brand,
-              'options' => $brand_options,
-            ],
-            [
-              'id' => 'filter-stock',
-              'name' => 'stock',
-              'placeholder' => __('Semua Status', 'karsa_start'),
-              'selected' => $current_stock,
-              'options' => [
-                'ready' => __('Tersedia', 'karsa_start'),
-                'indent' => __('Indent', 'karsa_start'),
-                'out_of_stock' => __('Habis', 'karsa_start'),
-              ],
-            ],
-          ],
-          'checkboxes' => [
-            [
-              'name' => 'on_sale',
-              'label' => __('Diskon', 'karsa_start'),
-              'checked' => $is_on_sale,
-            ],
-          ],
-        ]);
-        ?>
-
       </form>
 
-      <!-- Grid Produk / Empty State -->
-      <?php if (have_posts()): ?>
-        <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4">
-          <?php while (have_posts()):
-            the_post(); ?>
-            <?php
-            Helpers::component('cards/card-product', [
-              'name' => get_the_title(),
-              'url' => get_the_permalink(),
-              'image_url' => get_the_post_thumbnail_url(get_the_ID(), 'medium'),
-              'discount_rate' => get_field('discount_rate'),
-              'price' => get_field('price'),
-              'brands' => get_the_terms(get_the_ID(), 'product-brand'),
-              'categories' => get_the_terms(get_the_ID(), 'product-category'),
-              'stock_status' => get_field('stock_status'),
-              'tokopedia_link' => get_field('tokopedia_link'),
-              'shopee_link' => get_field('shopee_link'),
-              'lazada_link' => get_field('lazada_link'),
-              'blibli_link' => get_field('blibli_link'),
-            ]);
-            ?>
-          <?php endwhile; ?>
-        </div>
 
-        <!-- Pagination -->
-        <?php Helpers::component('pagination'); ?>
+      <div class="grid grid-cols-1 md:grid-cols-[auto_1fr] items-start gap-6 lg:gap-8">
+        <!-- Archive Filter -->
+        <form method="get" action="<?= esc_url($base_archive_url); ?>"
+          class="flex flex-col self-start md:sticky md:top-24 gap-4 bg-surface-bright rounded-lg">
 
-      <?php else: ?>
-        <div
-          class="py-16 px-8 text-center bg-surface rounded-lg border border-outline/20 shadow-sm flex flex-col items-center gap-4">
-          <p class="text-lg text-on-surface">
-            <?= esc_html__('Tidak ada produk yang cocok dengan filter ini.', 'karsa_start'); ?>
-          </p>
-          <a href="<?= esc_url($base_archive_url); ?>" class="text-xs text-primary hover:underline">
-            <?= esc_html__('Reset semua filter', 'karsa_start'); ?>
-          </a>
-        </div>
-      <?php endif; ?>
+          <h2><?= __('Cari berdasarkan') ?></h2>
+
+          <?php Helpers::render_hidden_query_inputs(['category', 'brand', 'stock', 'on_sale']); ?>
+
+          <?php Helpers::module('archive-filter', [
+            'wrapper_class' => 'flex-col items-stretch',
+            'reset_url' => $has_product_filter ? $reset_product_url : '',
+            'dropdowns' => [
+              [
+                'id' => 'filter-category',
+                'name' => 'category',
+                'placeholder' => __('Semua Kategori', 'karsa_start'),
+                'selected' => $current_category,
+                'options' => $category_options,
+              ],
+              [
+                'id' => 'filter-brand',
+                'name' => 'brand',
+                'placeholder' => __('Semua Brand', 'karsa_start'),
+                'selected' => $current_brand,
+                'options' => $brand_options,
+              ],
+              [
+                'id' => 'filter-stock',
+                'name' => 'stock',
+                'placeholder' => __('Semua Status', 'karsa_start'),
+                'selected' => $current_stock,
+                'options' => [
+                  'ready' => __('Tersedia', 'karsa_start'),
+                  'indent' => __('Indent', 'karsa_start'),
+                  'out_of_stock' => __('Habis', 'karsa_start'),
+                ],
+              ],
+            ],
+            'checkboxes' => [
+              [
+                'name' => 'on_sale',
+                'label' => __('Diskon', 'karsa_start'),
+                'checked' => $is_on_sale,
+              ],
+            ],
+          ]);
+          ?>
+
+        </form>
+
+        <!-- Empty State -->
+        <?php if (have_posts()): ?>
+          <div class="min-w-0 flex flex-col gap-8">
+            <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4">
+              <?php while (have_posts()):
+                the_post(); ?>
+                <?php
+                Helpers::component('cards/card-product', [
+                  'name' => get_the_title(),
+                  'url' => get_the_permalink(),
+                  'image_url' => get_the_post_thumbnail_url(get_the_ID(), 'medium'),
+                  'discount_rate' => get_field('discount_rate'),
+                  'price' => get_field('price'),
+                  'brands' => get_the_terms(get_the_ID(), 'product-brand'),
+                  'categories' => get_the_terms(get_the_ID(), 'product-category'),
+                  'stock_status' => get_field('stock_status'),
+                  'tokopedia_link' => get_field('tokopedia_link'),
+                  'shopee_link' => get_field('shopee_link'),
+                  'lazada_link' => get_field('lazada_link'),
+                  'blibli_link' => get_field('blibli_link'),
+                ]);
+                ?>
+              <?php endwhile; ?>
+            </div>
+
+            <!-- Pagination -->
+            <?php Helpers::component('pagination'); ?>
+          </div>
+        <?php else: ?>
+          <div
+            class="py-16 px-8 text-center bg-surface rounded-lg border border-outline/20 shadow-sm flex flex-col items-center gap-4">
+            <p class="text-lg text-on-surface">
+              <?= esc_html__('Tidak ada produk yang cocok dengan filter ini.', 'karsa_start'); ?>
+            </p>
+            <a href="<?= esc_url($base_archive_url); ?>" class="text-xs text-primary hover:underline">
+              <?= esc_html__('Reset semua filter', 'karsa_start'); ?>
+            </a>
+          </div>
+        <?php endif; ?>
+
+      </div>
 
     </div>
   </section>
