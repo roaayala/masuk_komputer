@@ -1,4 +1,5 @@
 import {
+  ArrowLeft,
   ArrowRight,
   ChevronDown,
   ChevronLeft,
@@ -25,6 +26,7 @@ const initLucideIcons = () => {
     icons: {
       // common
       ArrowRight,
+      ArrowLeft,
       ChevronDown,
       ChevronLeft,
       ChevronRight,

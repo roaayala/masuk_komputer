@@ -1,12 +1,12 @@
 <?php
 /**
  * Component: Pagination
- * 
  * @package KarsaStart
  */
 
-$total_pages = $args['total'] ?? $GLOBALS['wp_query']->max_num_pages ?? 1;
-$current_page = $args['current'] ?? max(1, get_query_var('paged'));
+$total_pages = (int) ($args['total'] ?? $GLOBALS['wp_query']->max_num_pages ?? 1);
+$current_page = (int) ($args['current'] ?? max(1, (int) get_query_var('paged'), (int) get_query_var('page')));
+$wrapper_class = $args['wrapper_class'] ?? '';
 
 if ($total_pages <= 1) {
   return;
@@ -16,14 +16,15 @@ $links = paginate_links([
   'total' => $total_pages,
   'current' => $current_page,
   'type' => 'array',
-  'format' => '?paged=%#%',
+  'mid_size' => $args['mid_size'] ?? 1,
+  'end_size' => $args['end_size'] ?? 1,
   'prev_text' => sprintf(
-    '<i data-lucide="move-left" class="w-4 h-4 shrink-0 leading-none"></i><span class="hidden sm:inline leading-none">%s</span>',
-    __('Kembali', 'karsa_start')
+    '<i data-lucide="arrow-left" class="w-4 h-4" aria-hidden="true"></i><span class="sr-only">%s</span>',
+    esc_html__('Halaman sebelumnya', 'karsa_start')
   ),
   'next_text' => sprintf(
-    '<span class="hidden sm:inline leading-none">%s</span><i data-lucide="move-right" class="w-4 h-4 shrink-0 leading-none"></i>',
-    __('Selanjutnya', 'karsa_start')
+    '<i data-lucide="arrow-right" class="w-4 h-4" aria-hidden="true"></i><span class="sr-only">%s</span>',
+    esc_html__('Halaman berikutnya', 'karsa_start')
   ),
 ]);
 
@@ -31,50 +32,29 @@ if (empty($links)) {
   return;
 }
 
-
-$prev_link_class = 'inline-flex items-center justify-end gap-4 min-w-28 text-base text-on-surface hover:text-primary transition-colors';
-$next_link_class = 'inline-flex items-center justify-start gap-4 min-w-28 text-base text-on-surface hover:text-primary transition-colors';
-$current_page_class = 'inline-flex items-center justify-center h-8 w-8 rounded-lg text-base font-semibold bg-primary text-on-primary';
-$dots_class = 'inline-flex items-center justify-center text-base text-on-surface-subtle';
-$page_numbers_class = 'inline-flex items-center justify-center h-8 w-8 rounded-lg text-base text-on-surface hover:bg-surface-container transition-colors';
+$base_class = 'min-w-8 h-8 px-2 rounded-md inline-flex items-center justify-center text-sm transition-colors';
+$default_class = "{$base_class} bg-transparent hover:bg-surface-dim text-on-surface-subtle";
+$current_class = "{$base_class} bg-primary font-medium text-on-primary";
+$dots_class = 'min-w-8 h-8 px-2 inline-flex items-center justify-center text-sm text-on-surface-subtle';
 ?>
 
-<nav class="flex items-center justify-center gap-2" aria-label="<?php esc_attr_e('Pagination', 'karsa_start'); ?>">
-  <?php foreach ($links as $link): ?>
-    <?php
-    $styled_link = match (true) {
-      // 1. PREV LINK
-      str_contains($link, 'prev') => str_replace(
-        'class="prev page-numbers"',
-        "class=\"{$prev_link_class}\"",
-        $link
-      ),
-      // 2. NEXT LINK 
-      str_contains($link, 'next') => str_replace(
-        'class="next page-numbers"',
-        "class=\"{$next_link_class}\"",
-        $link
-      ),
-      // 3. CURRENT PAGE
-      str_contains($link, 'current') => str_replace(
-        'class="page-numbers current"',
-        "class=\"{$current_page_class}\"",
-        $link
-      ),
-      // 4. DOTS (...)
-      str_contains($link, 'dots') => str_replace(
-        'class="page-numbers dots"',
-        "class=\"{$dots_class}\"",
-        $link
-      ),
-      // 5. REGULAR PAGE NUMBERS
-      default => str_replace(
-        'class="page-numbers"',
-        "class=\"{$page_numbers_class}\"",
-        $link
-      ),
-    };
+<nav
+  aria-label="<?= esc_attr__('Pagination', 'karsa_start'); ?>"
+  class="flex flex-wrap items-center justify-center gap-1.5 <?= esc_attr($wrapper_class); ?>">
+  <?php foreach ($links as $link):
+    $processor = new \WP_HTML_Tag_Processor($link);
+
+    if ($processor->next_tag()) {
+      $target_class = match (true) {
+        $processor->has_class('current') => $current_class,
+        $processor->has_class('dots') => $dots_class,
+        default => $default_class,
+      };
+
+      $processor->set_attribute('class', $target_class);
+      $link = $processor->get_updated_html();
+    }
     ?>
-    <?= $styled_link; ?>
+    <?= $link; ?>
   <?php endforeach; ?>
 </nav>

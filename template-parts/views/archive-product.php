@@ -114,36 +114,8 @@ $has_active_filter = ($current_sort !== 'newest') || ($current_limit !== 12);
       </div>
 
       <!-- Pagination -->
-      <?php
-      $pagination_links = paginate_links([
-        'type' => 'array',
-        'mid_size' => 1,
-        'prev_text' => '<i data-lucide="chevron-left" class="w-4 h-4"></i><span class="sr-only">' . esc_html__('Sebelumnya', 'karsa_start') . '</span>',
-        'next_text' => '<i data-lucide="chevron-right" class="w-4 h-4"></i><span class="sr-only">' . esc_html__('Berikutnya', 'karsa_start') . '</span>',
-      ]);
-      ?>
+      <?php Helpers::component('pagination') ?>
 
-      <?php if (!empty($pagination_links)): ?>
-        <nav aria-label="<?= esc_attr__('Navigasi halaman produk', 'karsa_start'); ?>"
-          class="pt-6 border-t border-outline/20 flex justify-center">
-          <ul class="flex flex-wrap items-center gap-1.5">
-            <?php foreach ($pagination_links as $link): ?>
-              <?php
-              $styled_link = str_replace(
-                ['page-numbers current', 'page-numbers dots', 'page-numbers'],
-                [
-                  'inline-flex items-center justify-center min-w-9 h-9 px-3 rounded-lg text-xs font-semibold bg-primary text-on-primary',
-                  'inline-flex items-center justify-center min-w-9 h-9 px-2 text-xs text-on-surface-subtle',
-                  'inline-flex items-center justify-center min-w-9 h-9 px-3 rounded-lg text-xs font-medium bg-surface border border-outline/20 text-on-surface hover:border-primary/40 hover:text-primary transition-colors',
-                ],
-                $link
-              );
-              ?>
-              <li><?= $styled_link; ?></li>
-            <?php endforeach; ?>
-          </ul>
-        </nav>
-      <?php endif; ?>
     </div>
   </section>
 
