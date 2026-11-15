@@ -23,12 +23,16 @@ $base_archive_url = strtok(get_pagenum_link(1), '?');
 $category_options = Helpers::get_term_options('product-category');
 $brand_options = Helpers::get_term_options('product-brand');
 
-$has_active_filter = ($current_sort !== 'newest')
-  || ($current_limit !== 12)
-  || ($current_category !== '')
+// Toolbar
+$has_toolbar_filter = ($current_sort !== 'newest') || ($current_limit !== 12);
+$reset_toolbar_url = Helpers::get_reset_url(['limit', 'sort'], $base_archive_url);
+
+// Filter
+$has_product_filter = ($current_category !== '')
   || ($current_brand !== '')
   || ($current_stock !== '')
   || $is_on_sale;
+$reset_product_url = Helpers::get_reset_url(['category', 'brand', 'stock', 'on_sale'], $base_archive_url);
 
 ?>
 <div class="flex-1 py-8 md:py-12 bg-surface-bright flex flex-col gap-8">
@@ -67,7 +71,7 @@ $has_active_filter = ($current_sort !== 'newest')
         <?php Helpers::module('archive-toolbar', [
           'total' => $total_products,
           'item_label' => 'produk',
-          'reset_url' => $has_active_filter ? $base_archive_url : '',
+          'reset_url' => $has_toolbar_filter ? $reset_toolbar_url : '',
           'limit' => [
             'id' => 'limit-products',
             'selected' => $current_limit,
@@ -89,6 +93,7 @@ $has_active_filter = ($current_sort !== 'newest')
         ]) ?>
 
         <?php Helpers::module('archive-filter', [
+          'reset_url' => $has_product_filter ? $reset_product_url : '',
           'dropdowns' => [
             [
               'id' => 'filter-category',
@@ -125,9 +130,6 @@ $has_active_filter = ($current_sort !== 'newest')
           ],
         ]);
         ?>
-
-
-
 
       </form>
 

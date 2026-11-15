@@ -8,9 +8,14 @@ use KarsaStart\Helpers;
 
 $total = (int) ($args['total'] ?? $GLOBALS['wp_query']->found_posts ?? 0);
 $item_label = $args['item_label'] ?? __('item', 'karsa_start');
+
 $limit = $args['limit'] ?? [];
+
 $sort = $args['sort'] ?? [];
+
 $reset_url = $args['reset_url'] ?? '';
+$reset_label = $args['reset_label'] ?? __('Bersihkan Filter', 'karsa_start');
+
 $wrapper_class = $args['wrapper_class'] ?? '';
 
 ?>
@@ -52,7 +57,7 @@ $wrapper_class = $args['wrapper_class'] ?? '';
 
     <?php if ($reset_url !== ''): ?>
       <a href="<?= esc_url($reset_url); ?>" class="text-xs font-medium text-primary hover:underline">
-        <?= esc_html__('Bersihkan Filter', 'karsa_start'); ?>
+        <?= esc_html($reset_label); ?>
       </a>
     <?php endif; ?>
   </div>

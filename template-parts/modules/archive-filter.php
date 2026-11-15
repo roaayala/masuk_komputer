@@ -8,6 +8,8 @@ use KarsaStart\Helpers;
 
 $dropdowns = $args['dropdowns'] ?? [];
 $checkboxes = $args['checkboxes'] ?? [];
+$reset_url = $args['reset_url'] ?? '';
+$reset_label = $args['reset_label'] ?? __('Bersihkan Filter', 'karsa_start');
 $wrapper_class = $args['wrapper_class'] ?? '';
 
 $active_dropdowns = array_filter($dropdowns, fn($item) => !empty($item['options']));
@@ -45,4 +47,10 @@ if (empty($active_dropdowns) && empty($checkboxes)) {
       </span>
     </label>
   <?php endforeach; ?>
+
+  <?php if ($reset_url !== ''): ?>
+    <a href="<?= esc_url($reset_url); ?>" class="text-xs font-medium text-primary hover:underline">
+      <?= esc_html($reset_label); ?>
+    </a>
+  <?php endif; ?>
 </div>
