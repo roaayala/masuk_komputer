@@ -20,6 +20,9 @@ $is_on_sale = !empty($_GET['on_sale']);
 
 $base_archive_url = strtok(get_pagenum_link(1), '?');
 
+$category_options = Helpers::get_term_options('product-category');
+$brand_options = Helpers::get_term_options('product-brand');
+
 $has_active_filter = ($current_sort !== 'newest')
   || ($current_limit !== 12)
   || ($current_category !== '')
@@ -27,26 +30,6 @@ $has_active_filter = ($current_sort !== 'newest')
   || ($current_stock !== '')
   || $is_on_sale;
 
-
-$category_options = [];
-if (!is_tax('product-category')) {
-  $terms = get_terms(['taxonomy' => 'product-category', 'hide_empty' => true]);
-  if (!is_wp_error($terms)) {
-    foreach ($terms as $term) {
-      $category_options[$term->slug] = $term->name;
-    }
-  }
-}
-
-$brand_options = [];
-if (!is_tax('product-brand')) {
-  $terms = get_terms(['taxonomy' => 'product-brand', 'hide_empty' => true]);
-  if (!is_wp_error($terms)) {
-    foreach ($terms as $term) {
-      $brand_options[$term->slug] = $term->name;
-    }
-  }
-}
 ?>
 <div class="flex-1 py-8 md:py-12 bg-surface-bright flex flex-col gap-8">
   <!-- PAGE HEADER -->

@@ -1,8 +1,4 @@
 <?php
-/**
- * Core: Helpers class
- */
-
 namespace KarsaStart;
 
 class Helpers
@@ -187,5 +183,26 @@ class Helpers
     }
 
     return $items;
+  }
+
+  /**
+   * Mengambil daftar term sebagai array ['slug' => 'Nama Term'] untuk select-dropdown.
+   */
+  public static function get_term_options(string $taxonomy): array
+  {
+    if (is_tax($taxonomy)) {
+      return [];
+    }
+
+    $terms = get_terms([
+      'taxonomy' => $taxonomy,
+      'hide_empty' => true,
+    ]);
+
+    if (is_wp_error($terms) || empty($terms)) {
+      return [];
+    }
+
+    return wp_list_pluck($terms, 'name', 'slug');
   }
 }
