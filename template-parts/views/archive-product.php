@@ -62,7 +62,7 @@ $has_active_filter = ($current_sort !== 'newest')
     <div class="container flex flex-col gap-8">
       <!-- Unified Filter, Sort & Limit Form -->
       <form method="get" action="<?= esc_url($base_archive_url); ?>"
-        class="flex flex-col gap-4 pb-6 border-b border-outline/20">
+        class="flex flex-col gap-6 pb-6 border-b border-outline/20">
 
         <?php Helpers::module('archive-toolbar', [
           'total' => $total_products,
@@ -88,50 +88,45 @@ $has_active_filter = ($current_sort !== 'newest')
           ],
         ]) ?>
 
-        <div class="flex flex-wrap items-center gap-4">
-          <?php if (!empty($category_options)): ?>
-            <?php Helpers::component('select-dropdown', [
+        <?php Helpers::module('archive-filter', [
+          'dropdowns' => [
+            [
               'id' => 'filter-category',
               'name' => 'category',
               'placeholder' => __('Semua Kategori', 'karsa_start'),
               'selected' => $current_category,
-              'auto_submit' => true,
               'options' => $category_options,
-            ]); ?>
-          <?php endif; ?>
-
-          <?php if (!empty($brand_options)): ?>
-            <?php Helpers::component('select-dropdown', [
+            ],
+            [
               'id' => 'filter-brand',
               'name' => 'brand',
               'placeholder' => __('Semua Brand', 'karsa_start'),
               'selected' => $current_brand,
-              'auto_submit' => true,
               'options' => $brand_options,
-            ]); ?>
-          <?php endif; ?>
-
-          <?php Helpers::component('select-dropdown', [
-            'id' => 'filter-stock',
-            'name' => 'stock',
-            'placeholder' => __('Semua Status', 'karsa_start'),
-            'selected' => $current_stock,
-            'auto_submit' => true,
-            'options' => [
-              'ready' => __('Tersedia', 'karsa_start'),
-              'indent' => __('Indent', 'karsa_start'),
-              'out_of_stock' => __('Habis', 'karsa_start'),
             ],
-          ]); ?>
+            [
+              'id' => 'filter-stock',
+              'name' => 'stock',
+              'placeholder' => __('Semua Status', 'karsa_start'),
+              'selected' => $current_stock,
+              'options' => [
+                'ready' => __('Tersedia', 'karsa_start'),
+                'indent' => __('Indent', 'karsa_start'),
+                'out_of_stock' => __('Habis', 'karsa_start'),
+              ],
+            ],
+          ],
+          'checkboxes' => [
+            [
+              'name' => 'on_sale',
+              'label' => __('Diskon', 'karsa_start'),
+              'checked' => $is_on_sale,
+            ],
+          ],
+        ]);
+        ?>
 
-          <label
-            class="inline-flex items-center gap-1.5 text-xs text-on-surface cursor-pointer select-none px-2.5 py-1.5 rounded-md border border-outline/40 bg-surface hover:border-primary/60">
-            <input type="checkbox" name="on_sale" value="1" onchange="this.form.submit()"
-              <?php checked($is_on_sale, true); ?>
-              class="rounded border-outline/40 text-primary focus:ring-primary">
-            <span><?= esc_html__('Diskon', 'karsa_start'); ?></span>
-          </label>
-        </div>
+
 
 
       </form>
