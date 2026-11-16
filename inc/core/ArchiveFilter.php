@@ -6,6 +6,16 @@ class ArchiveFilter
 {
   public static function apply(\WP_Query $query, array $config): void
   {
+
+    // KEYWORD SEARCH (pakai param kustom agar tetap merender template archive)
+    $search_param = $config['search'] ?? '';
+    if ($search_param !== '') {
+      $keyword = sanitize_text_field(wp_unslash($_GET[$search_param] ?? ''));
+      if ($keyword !== '') {
+        $query->set('s', $keyword);
+      }
+    }
+
     // 1. LIMIT ITEM
     if (!empty($config['limits'])) {
       $default = $config['limits'][1];

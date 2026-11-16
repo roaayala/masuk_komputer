@@ -6,6 +6,7 @@
 
 use KarsaStart\Helpers;
 
+$search = $args['search'] ?? [];
 $dropdowns = $args['dropdowns'] ?? [];
 $checkboxes = $args['checkboxes'] ?? [];
 $reset_url = $args['reset_url'] ?? '';
@@ -14,12 +15,23 @@ $wrapper_class = $args['wrapper_class'] ?? '';
 
 $active_dropdowns = array_filter($dropdowns, fn($item) => !empty($item['options']));
 
-if (empty($active_dropdowns) && empty($checkboxes)) {
+if (empty($search) && empty($active_dropdowns) && empty($checkboxes)) {
   return;
 }
 ?>
 
 <div class="flex flex-wrap items-center gap-4 <?= esc_attr($wrapper_class); ?>">
+  <?php if (!empty($search)): ?>
+    <input
+      type="search"
+      name="<?= esc_attr($search['name'] ?? 'q'); ?>"
+      value="<?= esc_attr($search['value'] ?? ''); ?>"
+      placeholder="<?= esc_attr($search['placeholder'] ?? __('Cari...', 'karsa_start')); ?>"
+      onchange="if (this.value.trim() !== this.defaultValue.trim()) this.form.submit()"
+      onsearch="if (this.value === '' && this.defaultValue !== '') this.form.submit()"
+      class="w-full text-xs bg-surface border border-outline/40 hover:border-primary/60 focus:border-primary rounded-md px-4 py-2 text-on-surface placeholder:text-on-surface-subtle focus:outline-none">
+  <?php endif; ?>
+
   <?php foreach ($active_dropdowns as $dropdown): ?>
     <?php Helpers::component('select-dropdown', [
       'id' => $dropdown['id'] ?? wp_unique_id('filter-'),
@@ -49,7 +61,9 @@ if (empty($active_dropdowns) && empty($checkboxes)) {
   <?php endforeach; ?>
 
   <?php if ($reset_url !== ''): ?>
-    <a href="<?= esc_url($reset_url); ?>" class="text-xs font-medium text-primary hover:underline">
+    <a href="<?= esc_url($reset_url); ?>"
+      onmousedown="event.preventDefault()"
+      class="text-xs font-medium text-primary hover:underline">
       <?= esc_html($reset_label); ?>
     </a>
   <?php endif; ?>

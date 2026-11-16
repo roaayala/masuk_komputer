@@ -46,7 +46,7 @@ foreach ($attributes as $attr_key => $attr_val) {
       id="<?= esc_attr($id) ?>"
       name="<?= esc_attr($name) ?>"
       <?= $auto_submit ? 'onchange="this.form.submit()"' : ''; ?>
-      class="appearance-none text-xs bg-surface border border-outline/40 rounded-md pl-2 pr-7 py-1 text-on-surfacefocus:outline-none focus:border-primary cursor-pointer <?= esc_attr($select_class); ?>"
+      class="appearance-none text-xs bg-surface border border-outline/40 rounded-md pl-2 pr-7 py-1 text-on-surface focus:outline-none focus:border-primary cursor-pointer <?= esc_attr($select_class); ?>"
       <?= $extra_attrs; ?>>
 
       <?php if ($placeholder !== ''): ?>

@@ -13,6 +13,7 @@ $allowed_limits = [6, 12, 24];
 $raw_limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 12;
 $current_limit = in_array($raw_limit, $allowed_limits, true) ? $raw_limit : 12;
 
+$current_search = sanitize_text_field(wp_unslash($_GET['q'] ?? ''));
 $current_sort = sanitize_text_field(wp_unslash($_GET['sort'] ?? 'newest'));
 $current_category = sanitize_title(wp_unslash($_GET['category'] ?? ''));
 $current_brand = sanitize_title(wp_unslash($_GET['brand'] ?? ''));
@@ -29,11 +30,13 @@ $has_toolbar_filter = ($current_sort !== 'newest') || ($current_limit !== 12);
 $reset_toolbar_url = Helpers::get_reset_url(['limit', 'sort'], $base_archive_url);
 
 // Filter
-$has_product_filter = ($current_category !== '')
+$has_product_filter = ($current_search !== '')
+  || ($current_category !== '')
   || ($current_brand !== '')
   || ($current_stock !== '')
   || $is_on_sale;
-$reset_product_url = Helpers::get_reset_url(['category', 'brand', 'stock', 'on_sale'], $base_archive_url);
+
+$reset_product_url = Helpers::get_reset_url(['q', 'category', 'brand', 'stock', 'on_sale'], $base_archive_url);
 
 ?>
 <div class="flex-1 py-8 md:py-12 bg-surface-bright flex flex-col gap-8">
@@ -105,10 +108,15 @@ $reset_product_url = Helpers::get_reset_url(['category', 'brand', 'stock', 'on_s
 
           <h2 class="text-xl"><?= __('Cari berdasarkan') ?></h2>
 
-          <?php Helpers::render_hidden_query_inputs(['category', 'brand', 'stock', 'on_sale']); ?>
+          <?php Helpers::render_hidden_query_inputs(['q', 'category', 'brand', 'stock', 'on_sale']); ?>
 
           <?php Helpers::module('archive-filter', [
             'reset_url' => $has_product_filter ? $reset_product_url : '',
+            'search' => [
+              'name' => 'q',
+              'value' => $current_search,
+              'placeholder' => __('Cari nama produk...', 'karsa_start'),
+            ],
             'dropdowns' => [
               [
                 'id' => 'filter-category',
@@ -150,7 +158,7 @@ $reset_product_url = Helpers::get_reset_url(['category', 'brand', 'stock', 'on_s
 
         <!-- Empty State -->
         <?php if (have_posts()): ?>
-          <div class="flex flex-col gap-8">
+          <div class="flex-1 flex flex-col gap-8">
             <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4">
               <?php while (have_posts()):
                 the_post(); ?>

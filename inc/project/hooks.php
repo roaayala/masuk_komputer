@@ -21,6 +21,7 @@ add_action('pre_get_posts', function (\WP_Query $query) {
   }
 
   ArchiveFilter::apply($query, [
+    'search' => 'q',
     'limits' => [6, 12, 24],
     'taxonomies' => [
       'category' => 'product-category',
