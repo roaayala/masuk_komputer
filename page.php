@@ -18,7 +18,7 @@ while (have_posts()):
       <div class="flex flex-col gap-8">
 
         <header class="flex flex-col gap-2">
-          <?php Helpers::component('breadchumb') ?>
+          <?php Helpers::component('breadcrumb') ?>
 
           <h1>
             <?= esc_html(get_the_title()) ?>

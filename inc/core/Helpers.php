@@ -130,57 +130,60 @@ class Helpers
     return array_map($normalize, $items);
   }
 
-  public static function get_archive_breadcrumb_items(
+
+  /**
+   * Menyusun item breadcrumb hierarkis untuk halaman single CPT.
+   */
+  public static function get_single_breadcrumb_items(
     string $post_type,
-    array $taxonomies = [],
-    array $labels = []
+    string $taxonomy = '',
+    string $root_label = ''
   ): array {
-    $items = [];
-    $post_type_obj = get_post_type_object($post_type);
-    $archive_url = get_post_type_archive_link($post_type) ?: null;
+    $items = [
+      [
+        'label' => __('Beranda', 'karsa_start'),
+        'url' => home_url('/'),
+      ],
+    ];
 
-    $root_label = $labels['root'] ?? ($post_type_obj->labels?->name ?? ucfirst($post_type));
-    $all_label = $labels['all'] ?? sprintf(__('Semua %s', 'karsa_start'), mb_strtolower($root_label));
-
-    if (is_post_type_archive($post_type)) {
+    $archive_url = get_post_type_archive_link($post_type);
+    if ($archive_url) {
+      $post_type_obj = get_post_type_object($post_type);
       $items[] = [
-        'label' => $all_label,
-        'url' => null,
+        'label' => $root_label !== '' ? $root_label : ($post_type_obj->labels->name ?? ucfirst($post_type)),
+        'url' => $archive_url,
       ];
-      return $items;
     }
 
-    if (!empty($taxonomies) && is_tax($taxonomies)) {
-      if ($archive_url) {
-        $items[] = [
-          'label' => $root_label,
-          'url' => $archive_url,
-        ];
-      }
+    if ($taxonomy !== '') {
+      $terms = get_the_terms(get_the_ID(), $taxonomy);
+      if (!empty($terms) && !is_wp_error($terms)) {
+        // Prioritaskan term terdalam (yang memiliki parent) agar hierarki penuh tampil
+        usort($terms, fn($a, $b) => $b->parent <=> $a->parent);
+        $primary_term = $terms[0];
 
-      $term = get_queried_object();
-      if ($term instanceof \WP_Term) {
-        if ($term->parent !== 0) {
-          $ancestors = array_reverse(get_ancestors($term->term_id, $term->taxonomy, 'taxonomy'));
-
-          foreach ($ancestors as $ancestor_id) {
-            $ancestor = get_term($ancestor_id, $term->taxonomy);
-            if ($ancestor instanceof \WP_Term && !is_wp_error($ancestor)) {
-              $ancestor_link = get_term_link($ancestor);
-              $items[] = [
-                'label' => $ancestor->name,
-                'url' => !is_wp_error($ancestor_link) ? $ancestor_link : null,
-              ];
-            }
+        $ancestors = array_reverse(get_ancestors($primary_term->term_id, $taxonomy, 'taxonomy'));
+        foreach ($ancestors as $ancestor_id) {
+          $ancestor = get_term($ancestor_id, $taxonomy);
+          if ($ancestor && !is_wp_error($ancestor)) {
+            $items[] = [
+              'label' => $ancestor->name,
+              'url' => get_term_link($ancestor),
+            ];
           }
         }
 
         $items[] = [
-          'label' => $term->name,
-          'url' => null,
+          'label' => $primary_term->name,
+          'url' => get_term_link($primary_term),
         ];
       }
     }
+
+    $items[] = [
+      'label' => get_the_title(),
+      'url' => '',
+    ];
 
     return $items;
   }
@@ -264,6 +267,7 @@ class Helpers
 
     return add_query_arg($remaining, $base_url);
   }
+
   /**
    * Render parameter GET aktif sebagai hidden input agar tidak hilang saat form lain di-submit.
    */

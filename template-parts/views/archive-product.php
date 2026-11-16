@@ -4,6 +4,7 @@
  * @package KarsaStart
  */
 
+use KarsaStart\Breadcrumb;
 use KarsaStart\Helpers;
 
 global $wp_query;
@@ -53,7 +54,7 @@ $reset_product_url = Helpers::get_reset_url(['q', 'category', 'brand', 'stock', 
   }
 
   Helpers::module('page-header', [
-    'breadcrumb_items' => Helpers::get_archive_breadcrumb_items(
+    'breadcrumb_items' => Breadcrumb::archive(
       'product',
       ['product-category', 'product-brand'],
       [

@@ -13,7 +13,7 @@ while (have_posts()):
   the_post(); ?>
   <div class="bg-surface-bright">
     <div class="container py-4">
-      <?php Helpers::component('breadchumb') ?>
+      <?php Helpers::component('breadcrumb') ?>
     </div>
     <!-- Hero -->
     <?php Helpers::module('hero', [
