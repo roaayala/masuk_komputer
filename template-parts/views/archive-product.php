@@ -12,6 +12,7 @@ $total_products = $wp_query->found_posts;
 $allowed_limits = [6, 12, 24];
 $raw_limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 12;
 $current_limit = in_array($raw_limit, $allowed_limits, true) ? $raw_limit : 12;
+
 $current_sort = sanitize_text_field(wp_unslash($_GET['sort'] ?? 'newest'));
 $current_category = sanitize_title(wp_unslash($_GET['category'] ?? ''));
 $current_brand = sanitize_title(wp_unslash($_GET['brand'] ?? ''));
@@ -66,7 +67,7 @@ $reset_product_url = Helpers::get_reset_url(['category', 'brand', 'stock', 'on_s
     <div class="container flex flex-col gap-6">
       <!-- Archive Toolbar -->
       <form method="get" action="<?= esc_url($base_archive_url); ?>"
-        class="flex flex-col gap-6 pb-6 border-b border-outline/20">
+        class="flex flex-col gap-6">
 
         <?php Helpers::render_hidden_query_inputs(['limit', 'sort']); ?>
 
@@ -97,17 +98,16 @@ $reset_product_url = Helpers::get_reset_url(['category', 'brand', 'stock', 'on_s
       </form>
 
 
-      <div class="grid grid-cols-1 md:grid-cols-[auto_1fr] items-start gap-6 lg:gap-8">
+      <div class="flex flex-col items-start md:flex-row gap-8">
         <!-- Archive Filter -->
         <form method="get" action="<?= esc_url($base_archive_url); ?>"
-          class="flex flex-col self-start md:sticky md:top-24 gap-4 bg-surface-bright rounded-lg">
+          class="md:max-w-60 flex flex-col self-start md:sticky md:top-24 gap-4 bg-surface-bright rounded-lg">
 
-          <h2><?= __('Cari berdasarkan') ?></h2>
+          <h2 class="text-xl"><?= __('Cari berdasarkan') ?></h2>
 
           <?php Helpers::render_hidden_query_inputs(['category', 'brand', 'stock', 'on_sale']); ?>
 
           <?php Helpers::module('archive-filter', [
-            'wrapper_class' => 'flex-col items-stretch',
             'reset_url' => $has_product_filter ? $reset_product_url : '',
             'dropdowns' => [
               [
@@ -150,7 +150,7 @@ $reset_product_url = Helpers::get_reset_url(['category', 'brand', 'stock', 'on_s
 
         <!-- Empty State -->
         <?php if (have_posts()): ?>
-          <div class="min-w-0 flex flex-col gap-8">
+          <div class="flex flex-col gap-8">
             <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4">
               <?php while (have_posts()):
                 the_post(); ?>
@@ -178,7 +178,7 @@ $reset_product_url = Helpers::get_reset_url(['category', 'brand', 'stock', 'on_s
           </div>
         <?php else: ?>
           <div
-            class="py-16 px-8 text-center bg-surface rounded-lg border border-outline/20 shadow-sm flex flex-col items-center gap-4">
+            class="flex-1 py-16 px-8 text-center bg-surface rounded-lg border border-outline/20 shadow-sm flex flex-col items-center gap-4">
             <p class="text-lg text-on-surface">
               <?= esc_html__('Tidak ada produk yang cocok dengan filter ini.', 'karsa_start'); ?>
             </p>

@@ -8,7 +8,7 @@ class ArchiveFilter
   {
     // 1. LIMIT ITEM
     if (!empty($config['limits'])) {
-      $default = $config['limits'][0];
+      $default = $config['limits'][1];
       $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : $default;
       $query->set('posts_per_page', in_array($limit, $config['limits'], true) ? $limit : $default);
     }

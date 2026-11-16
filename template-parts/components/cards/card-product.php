@@ -95,7 +95,7 @@ $has_marketplace = $tokopedia_link || $shopee_link || $lazada_link || $blibli_li
     </div>
 
     <!-- name -->
-    <h3 class="flex-1 text-base line-clamp-2 mb-2">
+    <h3 class="flex-1 text-base line-clamp-3 mb-2">
       <a href="<?= esc_url($url ?: '#') ?>" class="hover:text-primary transition-colors">
         <?= esc_html($name) ?>
       </a>
