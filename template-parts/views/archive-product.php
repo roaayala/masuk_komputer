@@ -4,6 +4,7 @@
  * @package KarsaStart
  */
 
+use KarsaStart\ArchiveFilter;
 use KarsaStart\Breadcrumb;
 use KarsaStart\Helpers;
 
@@ -28,7 +29,7 @@ $brand_options = Helpers::get_term_options('product-brand');
 
 // Toolbar
 $has_toolbar_filter = ($current_sort !== 'newest') || ($current_limit !== 12);
-$reset_toolbar_url = Helpers::get_reset_url(['limit', 'sort'], $base_archive_url);
+$reset_toolbar_url = ArchiveFilter::get_reset_url(['limit', 'sort'], $base_archive_url);
 
 // Filter
 $has_product_filter = ($current_search !== '')
@@ -37,7 +38,7 @@ $has_product_filter = ($current_search !== '')
   || ($current_stock !== '')
   || $is_on_sale;
 
-$reset_product_url = Helpers::get_reset_url(['q', 'category', 'brand', 'stock', 'on_sale'], $base_archive_url);
+$reset_product_url = ArchiveFilter::get_reset_url(['q', 'category', 'brand', 'stock', 'on_sale'], $base_archive_url);
 
 ?>
 <div class="flex-1 py-8 md:py-12 bg-surface-bright flex flex-col gap-8">
@@ -73,7 +74,7 @@ $reset_product_url = Helpers::get_reset_url(['q', 'category', 'brand', 'stock', 
       <form method="get" action="<?= esc_url($base_archive_url); ?>"
         class="flex flex-col gap-6">
 
-        <?php Helpers::render_hidden_query_inputs(['limit', 'sort']); ?>
+        <?php ArchiveFilter::render_hidden_query_inputs(['limit', 'sort']); ?>
 
         <?php Helpers::module('archive-toolbar', [
           'total' => $total_products,
@@ -109,7 +110,7 @@ $reset_product_url = Helpers::get_reset_url(['q', 'category', 'brand', 'stock', 
 
           <h2 class="text-xl"><?= __('Cari berdasarkan') ?></h2>
 
-          <?php Helpers::render_hidden_query_inputs(['q', 'category', 'brand', 'stock', 'on_sale']); ?>
+          <?php ArchiveFilter::render_hidden_query_inputs(['q', 'category', 'brand', 'stock', 'on_sale']); ?>
 
           <?php Helpers::module('archive-filter', [
             'reset_url' => $has_product_filter ? $reset_product_url : '',
