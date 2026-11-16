@@ -3,16 +3,7 @@ namespace KarsaStart;
 
 class Helpers
 {
-  public static function format_rupiah($price): string
-  {
-    if (empty($price) || !is_numeric($price)) {
-      return 'Hubungi Kami';
-    }
 
-    $price = (float) $price;
-
-    return 'Rp' . number_format($price, 0, ',', '.');
-  }
 
   public static function get_icon(string $name, string $class = ''): string
   {
@@ -131,62 +122,6 @@ class Helpers
   }
 
 
-  /**
-   * Menyusun item breadcrumb hierarkis untuk halaman single CPT.
-   */
-  public static function get_single_breadcrumb_items(
-    string $post_type,
-    string $taxonomy = '',
-    string $root_label = ''
-  ): array {
-    $items = [
-      [
-        'label' => __('Beranda', 'karsa_start'),
-        'url' => home_url('/'),
-      ],
-    ];
-
-    $archive_url = get_post_type_archive_link($post_type);
-    if ($archive_url) {
-      $post_type_obj = get_post_type_object($post_type);
-      $items[] = [
-        'label' => $root_label !== '' ? $root_label : ($post_type_obj->labels->name ?? ucfirst($post_type)),
-        'url' => $archive_url,
-      ];
-    }
-
-    if ($taxonomy !== '') {
-      $terms = get_the_terms(get_the_ID(), $taxonomy);
-      if (!empty($terms) && !is_wp_error($terms)) {
-        // Prioritaskan term terdalam (yang memiliki parent) agar hierarki penuh tampil
-        usort($terms, fn($a, $b) => $b->parent <=> $a->parent);
-        $primary_term = $terms[0];
-
-        $ancestors = array_reverse(get_ancestors($primary_term->term_id, $taxonomy, 'taxonomy'));
-        foreach ($ancestors as $ancestor_id) {
-          $ancestor = get_term($ancestor_id, $taxonomy);
-          if ($ancestor && !is_wp_error($ancestor)) {
-            $items[] = [
-              'label' => $ancestor->name,
-              'url' => get_term_link($ancestor),
-            ];
-          }
-        }
-
-        $items[] = [
-          'label' => $primary_term->name,
-          'url' => get_term_link($primary_term),
-        ];
-      }
-    }
-
-    $items[] = [
-      'label' => get_the_title(),
-      'url' => '',
-    ];
-
-    return $items;
-  }
 
   /**
    * Mengambil daftar term sebagai array ['slug' => 'Nama Term'] untuk select-dropdown.

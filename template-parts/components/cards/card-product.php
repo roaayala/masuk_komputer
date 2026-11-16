@@ -4,6 +4,7 @@
  * @package KarsaStart
  */
 
+use KarsaStart\Format;
 use KarsaStart\Helpers;
 
 $wrapper_classes = $args['wrapper_classes'] ?? '';
@@ -105,14 +106,14 @@ $has_marketplace = $tokopedia_link || $shopee_link || $lazada_link || $blibli_li
     <div class="flex flex-col mb-3">
       <?php if ($discount_rate > 0): ?>
         <span class="font-normal text-xs text-on-surface-variant line-through">
-          <?= esc_html(Helpers::format_rupiah($price)) ?>
+          <?= esc_html(Format::rupiah($price)) ?>
         </span>
         <span class="font-semibold text-base text-primary">
-          <?= esc_html(Helpers::format_rupiah($discounted_price)) ?>
+          <?= esc_html(Format::rupiah($discounted_price)) ?>
         </span>
       <?php else: ?>
         <span class="font-semibold text-base text-primary">
-          <?= esc_html(Helpers::format_rupiah($price)) ?>
+          <?= esc_html(Format::rupiah($price)) ?>
         </span>
       <?php endif ?>
     </div>
