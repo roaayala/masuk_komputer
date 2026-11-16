@@ -5,9 +5,10 @@
  */
 
 use KarsaStart\Helpers;
+use KarsaStart\Taxonomy;
 
-$categories = Helpers::get_active_taxonomy_tree('product-category');
-$brands = Helpers::get_active_taxonomy_tree('product-brand');
+$categories = Taxonomy::get_active_tree('product-category');
+$brands = Taxonomy::get_active_tree('product-brand');
 
 $nav_items = [
   [

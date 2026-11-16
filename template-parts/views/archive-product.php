@@ -7,6 +7,7 @@
 use KarsaStart\ArchiveFilter;
 use KarsaStart\Breadcrumb;
 use KarsaStart\Helpers;
+use KarsaStart\Taxonomy;
 
 global $wp_query;
 $total_products = $wp_query->found_posts;
@@ -24,8 +25,8 @@ $is_on_sale = !empty($_GET['on_sale']);
 
 $base_archive_url = strtok(get_pagenum_link(1), '?');
 
-$category_options = Helpers::get_term_options('product-category');
-$brand_options = Helpers::get_term_options('product-brand');
+$category_options = Taxonomy::get_term_options('product-category');
+$brand_options = Taxonomy::get_term_options('product-brand');
 
 // Toolbar
 $has_toolbar_filter = ($current_sort !== 'newest') || ($current_limit !== 12);

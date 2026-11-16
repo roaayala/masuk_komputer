@@ -5,6 +5,7 @@
  */
 
 use KarsaStart\Helpers;
+use KarsaStart\Taxonomy;
 
 $items = $args['items'] ?? [];
 $is_mobile = $args['is_mobile'] ?? false;
@@ -20,7 +21,7 @@ if (empty($items)) {
     <?php if ($item['type'] === 'dropdown'): ?>
       <?php
       $dropdown_component = $is_mobile ? 'nav/menu-dropdown-mobile' : 'nav/menu-dropdown-desktop';
-      $normalized_sub_items = Helpers::normalize_menu_items($item['items'] ?? []);
+      $normalized_sub_items = Taxonomy::normalize_menu_items($item['items'] ?? []);
 
       Helpers::component($dropdown_component, [
         'items' => $normalized_sub_items,
