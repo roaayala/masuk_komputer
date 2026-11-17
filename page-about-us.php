@@ -12,7 +12,7 @@ get_header();
 while (have_posts()):
   the_post(); ?>
   <div class="bg-surface-bright">
-    <div class="container py-4">
+    <div class="container py-8">
       <?php Helpers::component('breadcrumb') ?>
     </div>
     <!-- Hero -->

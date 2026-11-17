@@ -42,6 +42,7 @@ if (is_array($custom_items) && !empty($custom_items)) {
 
 $last_index = count($items) - 1;
 
+
 ?>
 
 <nav aria-label="Breadcrumb" class="<?= esc_attr($wrapper_classes) ?>">

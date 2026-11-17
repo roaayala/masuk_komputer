@@ -2,8 +2,8 @@
   .btn {
     @apply inline-flex items-center justify-center gap-2
     px-4 py-2
-    h-9
-    rounded-lg
+    h-10
+    rounded-full
     border border-transparent
     cursor-pointer;
 
@@ -49,7 +49,7 @@
   }
 
   .badge {
-    @apply self-start inline-flex items-center py-1 px-2 gap-2 rounded-md border border-transparent;
+    @apply self-start inline-flex items-center py-1 px-2 gap-2 rounded-full border border-transparent;
 
     > .label {
       @apply font-medium text-xs;
