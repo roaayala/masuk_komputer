@@ -51,4 +51,9 @@ class Helpers
     self::render("views/{$name}", $args);
   }
 
+  public static function wa_url()
+  {
+
+  }
+
 }

@@ -12,7 +12,7 @@ $title = $args['title'] ?? 'Title';
 
 <header>
   <div class="container">
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-4">
       <?php if ($show_breadcrumb):
         Helpers::component('breadcrumb', ['items' => $breadcrumb_items]);
       endif; ?>

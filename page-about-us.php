@@ -11,8 +11,8 @@ get_header();
 // Page View Here 
 while (have_posts()):
   the_post(); ?>
-  <div class="bg-surface-bright">
-    <div class="container py-8">
+  <div class="py-8 md:py-12 bg-surface-bright">
+    <div class="container">
       <?php Helpers::component('breadcrumb') ?>
     </div>
     <!-- Hero -->

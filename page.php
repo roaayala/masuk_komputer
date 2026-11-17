@@ -13,7 +13,7 @@ while (have_posts()):
   the_post();
   ?>
 
-  <article id="post-<?php the_ID(); ?>" <?php post_class('flex-1 py-8 bg-surface-bright'); ?>>
+  <article id="post-<?php the_ID(); ?>" <?php post_class('flex-1 py-8 md:py-12 bg-surface-bright'); ?>>
     <div class="container content-container">
       <div class="flex flex-col gap-8">
 
