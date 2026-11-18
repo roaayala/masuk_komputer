@@ -2,13 +2,13 @@
   .btn {
     @apply inline-flex items-center justify-center gap-2
     px-4 py-2
-    h-9
+    h-10
     rounded-lg
     border border-transparent
     cursor-pointer;
 
     &:hover {
-      @apply hover:opacity-90;
+      @apply opacity-90;
     }
 
     > .icon {
@@ -24,7 +24,7 @@
     }
 
     &.btn--neutral {
-      @apply bg-surface-container text-on-surface;
+      @apply bg-surface-container border-surface-container text-on-surface;
 
       &.btn--outline {
         @apply bg-transparent border-outline/40 hover:bg-surface-container text-on-surface;
@@ -49,14 +49,14 @@
   }
 
   .badge {
-    @apply self-start inline-flex items-center py-1 px-2 gap-2 rounded-md border border-transparent;
+    @apply self-start inline-flex items-center py-1 px-2 gap-2 rounded-sm border border-transparent;
 
     > .label {
       @apply font-medium text-xs;
     }
 
     > .icon {
-      @apply w-4 h-4 stroke-[1.75];
+      @apply w-4 h-4 stroke-2;
     }
 
     &.badge--neutral {
@@ -64,7 +64,7 @@
     }
 
     &.badge--primary {
-      @apply text-primary bg-primary-container border-primary-container;
+      @apply bg-primary-container border-primary-container text-on-primary-container;
     }
 
     &.badge--danger {

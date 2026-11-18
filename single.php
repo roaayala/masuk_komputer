@@ -90,18 +90,18 @@ $marketplaces = [
       <!-- Title & Actions -->
       <section class="flex flex-col gap-6 lg:sticky lg:top-24">
         <div class="flex flex-col gap-2">
-          <h1 class="text-lg"><?= esc_html(get_the_title($product_id)) ?></h1>
+          <h1 class="font-semibold text-xl sm:text-2xl"><?= esc_html(get_the_title($product_id)) ?></h1>
 
-          <div class="flex flex-col">
+          <div class="flex flex-col gap">
             <?php if ($discount_rate > 0): ?>
               <span class="font-normal text-xs text-on-surface-variant line-through">
                 <?= esc_html(Format::rupiah($initial_price)) ?>
               </span>
-              <span class="font-semibold text-lg text-primary">
+              <span class="font-bold text-xl sm:text-2xl text-primary">
                 <?= esc_html(Format::rupiah($price)) ?>
               </span>
             <?php else: ?>
-              <span class="font-semibold text-lg text-primary">
+              <span class="font-bold text-xl sm:text-2xl text-primary">
                 <?= esc_html(Format::rupiah($price)) ?>
               </span>
             <?php endif ?>

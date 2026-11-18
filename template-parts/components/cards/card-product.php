@@ -33,7 +33,7 @@ $has_marketplace = $tokopedia_link || $shopee_link || $lazada_link || $blibli_li
 ?>
 
 <div
-  class="group w-full shrink-0 flex flex-col bg-surface-bright border border-outline/20 hover:border-primary/40 shadow-sm rounded-lg overflow-hidden <?= esc_attr($wrapper_classes) ?>">
+  class="group w-full shrink-0 flex flex-col bg-surface-bright border border-outline/20 hover:border-primary/40 shadow-sm rounded-2xl overflow-hidden <?= esc_attr($wrapper_classes) ?>">
 
   <!-- thumbnail and floating badges -->
   <div class="relative aspect-square border border-outline/20 overflow-hidden">
@@ -44,7 +44,7 @@ $has_marketplace = $tokopedia_link || $shopee_link || $lazada_link || $blibli_li
     </a>
 
     <?php if ($discount_rate > 0): ?>
-      <div class="absolute z-10 top-2 right-2">
+      <div class="absolute z-10 top-4 right-4">
         <span class="badge badge--danger">
           <span class="label">
             -<?= esc_html($discount_rate) ?>%
@@ -55,7 +55,7 @@ $has_marketplace = $tokopedia_link || $shopee_link || $lazada_link || $blibli_li
 
     <!-- category list -->
     <?php if (!empty($categories)): ?>
-      <div class="absolute top-2 left-2 flex flex-col gap-2">
+      <div class="absolute top-4 left-4 flex flex-col gap-2">
         <?php foreach ($categories as $category): ?>
           <?php if ($category->parent == 0): ?>
             <span class="badge badge--neutral">
@@ -69,9 +69,9 @@ $has_marketplace = $tokopedia_link || $shopee_link || $lazada_link || $blibli_li
     <?php endif ?>
   </div>
 
-  <div class="p-6 flex-1 flex flex-col justify-between">
+  <div class="p-4 flex-1 flex flex-col justify-between gap-4">
 
-    <div class="flex items-end mb-4">
+    <div class="flex items-end">
       <!-- brand  -->
       <?php if (!empty($brands)): ?>
         <div class="flex gap-2">
@@ -96,30 +96,30 @@ $has_marketplace = $tokopedia_link || $shopee_link || $lazada_link || $blibli_li
     </div>
 
     <!-- name -->
-    <h3 class="flex-1 text-base line-clamp-3 mb-2">
+    <h3 class="flex-1 text-base line-clamp-2">
       <a href="<?= esc_url($url ?: '#') ?>" class="hover:text-primary transition-colors">
         <?= esc_html($name) ?>
       </a>
     </h3>
 
     <!-- price area -->
-    <div class="flex flex-col mb-3">
+    <div class="flex flex-col">
       <?php if ($discount_rate > 0): ?>
         <span class="font-normal text-xs text-on-surface-variant line-through">
           <?= esc_html(Format::rupiah($price)) ?>
         </span>
-        <span class="font-semibold text-base text-primary">
+        <span class="font-bold text-base text-primary">
           <?= esc_html(Format::rupiah($discounted_price)) ?>
         </span>
       <?php else: ?>
-        <span class="font-semibold text-base text-primary">
+        <span class="font-bold text-base text-primary">
           <?= esc_html(Format::rupiah($price)) ?>
         </span>
       <?php endif ?>
     </div>
 
     <!-- cta -->
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col">
       <a href="#" target="_blank" class="btn btn--primary w-full">
         <i data-lucide="phone" class="icon"></i>
         <span class="label"><?php _e('Hubungi kami', 'karsa_start') ?></span>
