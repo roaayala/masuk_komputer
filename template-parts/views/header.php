@@ -40,7 +40,7 @@ $nav_items = $args['nav_items'] ?? [];
         </button>
 
         <nav x-show="open" x-cloak @click.outside="open = false" x-transition
-          class="absolute top-full left-4 sm:left-8 right-4 sm:right-8 mt-2 bg-surface-bright p-6 border border-outline/40 rounded-lg shadow-lg z-50 flex flex-col max-h-[80vh] overflow-y-auto">
+          class="absolute top-full left-4 sm:left-8 right-4 sm:right-8 mt-2 bg-surface-bright p-6 border border-outline/40 rounded-2xl shadow-lg z-50 flex flex-col max-h-[80vh] overflow-y-auto">
 
           <?php Helpers::component('nav/menu-list', [
             'items' => $nav_items,
