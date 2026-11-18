@@ -39,7 +39,6 @@ class Taxonomy
 
   }
 
-
   public static function normalize_menu_items(array $items): array
   {
     $normalize = function ($item) use (&$normalize) {

@@ -162,7 +162,7 @@ $reset_product_url = ArchiveFilter::get_reset_url(['q', 'category', 'brand', 'st
         </form>
 
         <?php if (have_posts()): ?>
-          <div class="flex-1 flex flex-col gap-8">
+          <div class="w-full flex-1 flex flex-col gap-8">
             <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4">
               <?php while (have_posts()):
                 the_post(); ?>

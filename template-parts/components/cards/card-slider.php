@@ -36,7 +36,7 @@ if (empty($slides)) {
             startTimer() { this.timer = setInterval(() => this.next(), 6000) },
             stopTimer() { clearInterval(this.timer) }
            }" x-init="startTimer()" @mouseenter="stopTimer()" @mouseleave="startTimer()"
-  class="rounded-2xl border border-outline/20 overflow-hidden flex flex-col gap-6 justify-between p-8 bg-surface-bright shadow-sm <?= esc_attr($wrapper_class) ?>">
+  class="rounded-2xl border border-outline/20 overflow-hidden flex flex-col gap-6 justify-between p-6 sm:p-8 bg-surface-bright shadow-sm <?= esc_attr($wrapper_class) ?>">
 
   <?php foreach ($slides as $index => $slide): ?>
     <div x-show=" active===<?= $index ?>" x-cloak x-transition:enter="transition ease-out duration-300"
