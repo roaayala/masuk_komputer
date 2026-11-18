@@ -6,18 +6,18 @@
 
 use KarsaStart\Helpers;
 
-$wrapper_classes = $args['wrapper_classes'] ?? 'bg-surface';
+$wrapper_class = $args['wrapper_class'] ?? 'bg-surface';
 $slides = $args['slides'] ?? [];
 $cards = $args['cards'] ?? [];
 ?>
 
-<section class="py-8 md:py-12 <?= esc_attr($wrapper_classes) ?>">
+<section class="py-8 md:py-12 <?= esc_attr($wrapper_class) ?>">
   <div class="container">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
       <!-- LEFT SIDE: SLIDER PROMO (2 COLUMNS ON DESKTOP) -->
       <?php Helpers::component('cards/card-slider', [
-        'wrapper_classes' => 'md:col-span-2',
+        'wrapper_class' => 'md:col-span-2',
         'slides' => $slides
       ]) ?>
 
