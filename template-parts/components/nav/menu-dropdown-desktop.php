@@ -23,7 +23,7 @@ if (empty($items)) {
   </button>
 
   <div x-show="expanded"
-    class="absolute top-full right-0 z-50 mt-2 min-w-60 bg-surface-bright p-6 border border-outline/40 rounded-lg shadow-lg flex flex-col gap-4"
+    class="absolute top-full right-0 z-50 mt-2 min-w-60 bg-surface-bright p-6 border border-outline/40 rounded-2xl shadow-lg flex flex-col gap-4"
     x-transition>
     <?php foreach ($items as $item): ?>
       <div class="flex flex-col gap-3">
