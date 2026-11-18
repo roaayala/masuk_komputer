@@ -16,7 +16,7 @@ $description = $args['description'] ?? __(
 
 <a href="<?= esc_url($url) ?>" class="block group">
   <div
-    class="h-full w-full p-6 flex flex-col gap-6 bg-surface-bright rounded-lg shadow-sm border border-outline/20 hover:border-primary/40">
+    class="h-full w-full p-6 flex flex-col gap-6 bg-surface-bright rounded-2xl shadow-sm border border-outline/20 hover:border-primary/40">
     <div class="flex flex-col gap-4">
 
       <!-- Icon Container / Badge -->
@@ -27,7 +27,7 @@ $description = $args['description'] ?? __(
 
       <!-- Title & Description -->
       <div class="flex flex-col gap-1">
-        <h3 class="text-base">
+        <h3 class="text-base group-hover:text-primary">
           <?= esc_html($title) ?>
         </h3>
         <p class="text-xs text-on-surface-subtle">

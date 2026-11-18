@@ -191,17 +191,15 @@ $marketplaces = [
         </h2>
       </div>
 
-      <div class="w-full grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-4">
         <?php foreach ($marketplaces as $marketplace): ?>
 
           <a href="<?= esc_url($marketplace['url']) ?>" class="group block" target="_blank">
             <div
-              class="w-full h-20 sm:h-30 p-4 bg-surface-bright rounded-lg border border-outline/20 hover:border-primary/40 shadow-sm flex items-center justify-center transition-border duration-150">
+              class="w-full h-20 sm:h-30 p-4 bg-surface-bright rounded-2xl border border-outline/20 hover:border-primary/40 shadow-sm flex items-center justify-center transition-border duration-150">
               <?= Helpers::get_icon(
                 $marketplace['key'],
-                $marketplace['key'] == 'tokopedia'
-                ? 'h-6 sm:h-8 mt-1'
-                : ($marketplace['key'] ? 'h-7 sm:h-9' : 'h-8 sm:h-10')
+                'h-6 sm:h-8'
               ) ?>
             </div>
           </a>
